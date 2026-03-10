@@ -36,7 +36,6 @@ export const router = createBrowserRouter([
   { path: 'login',           element: <LoginPage /> },
   { path: 'sign-up',         element: <SignUpPage /> },
   { path: 'forgot-password', element: <ForgotPasswordPage /> },
-
   {
     path: '/',
     element: <AppLayout />,
