@@ -81,4 +81,4 @@ export const router = createBrowserRouter([
       { path: 'organisation', element: <OrganisationPage /> },
     ],
   },
-])
+], { basename: '/employer-web' })
