@@ -55,7 +55,7 @@ export default function LoginPage() {
     <div className="max-w-[480px] mx-auto px-4 md:px-6 py-6 md:py-8">
       {/* Logo */}
       <div className="flex justify-center mb-6">
-        <img src="/alumable-horizontal.png" alt="Alumable" className="h-10" />
+        <img src={`${import.meta.env.BASE_URL}alumable-horizontal.png`} alt="Alumable" className="h-10" />
       </div>
 
       {/* Heading */}

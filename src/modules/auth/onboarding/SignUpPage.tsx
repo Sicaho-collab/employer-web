@@ -101,7 +101,7 @@ export default function SignUpPage() {
     return (
       <div className="max-w-[480px] mx-auto px-4 md:px-6 py-6 md:py-8">
         <div className="flex justify-center mb-6">
-          <img src="/alumable-horizontal.png" alt="Alumable" className="h-10" />
+          <img src={`${import.meta.env.BASE_URL}alumable-horizontal.png`} alt="Alumable" className="h-10" />
         </div>
 
         <h1 className="text-xl font-semibold text-m3-on-surface text-center mb-8">
@@ -128,7 +128,7 @@ export default function SignUpPage() {
     <div className="max-w-[480px] mx-auto px-4 md:px-6 py-6 md:py-8">
       {/* Logo */}
       <div className="flex justify-center mb-6">
-        <img src="/alumable-horizontal.png" alt="Alumable" className="h-10" />
+        <img src={`${import.meta.env.BASE_URL}alumable-horizontal.png`} alt="Alumable" className="h-10" />
       </div>
 
       {/* Heading */}

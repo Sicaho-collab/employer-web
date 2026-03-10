@@ -56,7 +56,7 @@ export default function AppLayout() {
       {/* ── Top Navigation ── */}
       <header className="sticky top-0 z-40 h-[60px] bg-m3-surface border-b border-m3-outline-variant flex items-center px-4 md:px-6 gap-4 md:gap-8">
         {/* Brand */}
-        <img src="/alumable-horizontal.png" alt="Alumable" className="h-8 shrink-0" />
+        <img src={`${import.meta.env.BASE_URL}alumable-horizontal.png`} alt="Alumable" className="h-8 shrink-0" />
 
         {/* Module Links */}
         <nav className="flex items-center gap-1 flex-1 overflow-x-auto">
