@@ -1,22 +1,35 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { LogOut } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { Card, Button } from '@sicaho-collab/m3-design-system'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+import { LogOut, LayoutDashboard, Briefcase, Wallet, Building2 } from 'lucide-react'
+import { NavigationRail, Card, Button } from '@sicaho-collab/m3-design-system'
+import type { NavRailItem } from '@sicaho-collab/m3-design-system'
 
 // Top-level navigation — max 4 modules per IA spec
-const NAV_ITEMS = [
-  { to: '/dashboard',    label: 'Dashboard'    },
-  { to: '/hiring',       label: 'Hiring'        },
-  { to: '/finance',      label: 'Finance'       },
-  { to: '/organisation', label: 'Organisation'  },
-] as const
+const NAV_ITEMS: { to: string; label: string; icon: React.ReactNode }[] = [
+  { to: '/dashboard',    label: 'Dashboard',    icon: <LayoutDashboard className="size-6" /> },
+  { to: '/hiring',       label: 'Hiring',       icon: <Briefcase className="size-6" /> },
+  { to: '/finance',      label: 'Finance',      icon: <Wallet className="size-6" /> },
+  { to: '/organisation', label: 'Organisation', icon: <Building2 className="size-6" /> },
+]
+
+const railItems: NavRailItem[] = NAV_ITEMS.map(({ label, icon }) => ({ label, icon }))
 
 export default function AppLayout() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [railExpanded, setRailExpanded] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
+
+  // Determine active nav index from current path
+  const activeIndex = NAV_ITEMS.findIndex(item =>
+    location.pathname.startsWith(item.to)
+  )
+
+  const handleNavSelect = (index: number) => {
+    navigate(NAV_ITEMS[index].to)
+  }
 
   const closeMenu = useCallback(() => {
     setMenuOpen(false)
@@ -51,77 +64,73 @@ export default function AppLayout() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-m3-surface">
-      {/* ── Top Navigation ── */}
-      <header className="sticky top-0 z-40 h-[60px] bg-m3-surface border-b border-m3-outline-variant flex items-center px-4 md:px-6 gap-4 md:gap-8">
-        {/* Brand */}
-        <img src={`${import.meta.env.BASE_URL}alumable-horizontal.png`} alt="Alumable" className="h-8 shrink-0" />
+    <div className="min-h-screen flex bg-m3-surface">
+      {/* ── Left Sidebar: Brand Logo + NavigationRail ── */}
+      {/* ── Left Sidebar: NavigationRail with logo ── */}
+      <NavigationRail
+        items={railItems}
+        activeIndex={activeIndex >= 0 ? activeIndex : 0}
+        onSelect={handleNavSelect}
+        expanded={railExpanded}
+        onExpandedChange={setRailExpanded}
+        header={
+          <img
+            src={`${import.meta.env.BASE_URL}alumable-stacked.png`}
+            alt="Alumable"
+            className="h-10"
+          />
+        }
+      />
 
-        {/* Module Links */}
-        <nav className="flex items-center gap-1 flex-1 overflow-x-auto">
-          {NAV_ITEMS.map(({ to, label }) => (
-            <NavLink
-              key={to}
-              to={to}
-              className={({ isActive }) =>
-                cn(
-                  "px-3 md:px-4 py-2 rounded-m3-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
-                  isActive
-                    ? "bg-m3-secondary-container text-m3-on-secondary-container shadow-m3-1"
-                    : "text-m3-on-surface-variant hover:bg-m3-on-surface/8 hover:scale-[1.02] active:scale-[0.98]"
-                )
-              }
+      {/* ── Right Content Area ── */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top bar with user menu */}
+        <header className="sticky top-0 z-40 h-[60px] bg-white border-b border-m3-outline-variant flex items-center justify-end px-4 md:px-6">
+          <div className="relative" ref={menuRef}>
+            <button
+              ref={triggerRef}
+              onClick={() => setMenuOpen(prev => !prev)}
+              aria-expanded={menuOpen}
+              aria-haspopup="true"
+              aria-label="User menu"
+              className="w-9 h-9 rounded-full bg-m3-primary flex items-center justify-center text-m3-on-primary text-sm font-bold cursor-pointer transition-shadow hover:shadow-m3-1"
             >
-              {label}
-            </NavLink>
-          ))}
-        </nav>
+              EH
+            </button>
 
-        {/* User Menu */}
-        <div className="relative" ref={menuRef}>
-          <button
-            ref={triggerRef}
-            onClick={() => setMenuOpen(prev => !prev)}
-            aria-expanded={menuOpen}
-            aria-haspopup="true"
-            aria-label="User menu"
-            className="w-9 h-9 rounded-full bg-m3-primary flex items-center justify-center text-m3-on-primary text-sm font-bold cursor-pointer transition-shadow hover:shadow-m3-1"
-          >
-            EH
-          </button>
+            {menuOpen && (
+              <Card
+                variant="elevated"
+                role="menu"
+                className="absolute right-0 top-full mt-2 w-[240px] z-50"
+              >
+                <div className="p-4 flex flex-col gap-1">
+                  <p className="text-sm font-medium text-m3-on-surface">Employer User</p>
+                  <p className="text-xs text-m3-on-surface-variant">employer@example.com</p>
+                </div>
+                <hr className="border-m3-outline-variant" />
+                <div className="p-2">
+                  <Button
+                    variant="text"
+                    size="sm"
+                    role="menuitem"
+                    onClick={handleSignOut}
+                    className="w-full justify-start gap-2"
+                  >
+                    <LogOut className="size-4" />
+                    Sign Out
+                  </Button>
+                </div>
+              </Card>
+            )}
+          </div>
+        </header>
 
-          {menuOpen && (
-            <Card
-              variant="elevated"
-              role="menu"
-              className="absolute right-0 top-full mt-2 w-[240px] z-50"
-            >
-              <div className="p-4 flex flex-col gap-1">
-                <p className="text-sm font-medium text-m3-on-surface">Employer User</p>
-                <p className="text-xs text-m3-on-surface-variant">employer@example.com</p>
-              </div>
-              <hr className="border-m3-outline-variant" />
-              <div className="p-2">
-                <Button
-                  variant="text"
-                  size="sm"
-                  role="menuitem"
-                  onClick={handleSignOut}
-                  className="w-full justify-start gap-2"
-                >
-                  <LogOut className="size-4" />
-                  Sign Out
-                </Button>
-              </div>
-            </Card>
-          )}
-        </div>
-      </header>
-
-      {/* ── Page Content ── */}
-      <main className="flex-1 overflow-auto">
-        <Outlet />
-      </main>
+        {/* ── Page Content ── */}
+        <main className="flex-1 overflow-auto">
+          <Outlet />
+        </main>
+      </div>
     </div>
   )
 }
