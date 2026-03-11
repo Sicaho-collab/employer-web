@@ -19,7 +19,6 @@ export interface GigV3Data {
   flexibleEnd: boolean
   scheduleNotes: string
   budget: string
-  estimatedHours: string
   locationType: '' | 'remote' | 'on-site' | 'hybrid'
   locationDetails: string
   applicationDeadline: string
@@ -41,7 +40,6 @@ export const INITIAL_DATA: GigV3Data = {
   flexibleEnd: false,
   scheduleNotes: '',
   budget: '',
-  estimatedHours: '',
   locationType: '',
   locationDetails: '',
   applicationDeadline: '',

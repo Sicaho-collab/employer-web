@@ -1,7 +1,6 @@
 import { Clock } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Card, CardHeader, CardTitle, CardContent, CardFooter, Button } from '@sicaho-collab/m3-design-system'
 import StageBadge from '@/components/ui/StageBadge'
 import type { Gig } from '@/types/gig'
 import {

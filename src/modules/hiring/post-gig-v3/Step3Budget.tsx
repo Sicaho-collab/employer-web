@@ -1,9 +1,8 @@
 import { useState, useMemo } from 'react'
 import { Info } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { TextField } from '@/components/ui/text-field'
+import { Button, Card, TextField } from '@sicaho-collab/m3-design-system'
 import type { GigV3Data } from './PostGigV3Page'
+import { calculateFeeBreakdown, formatCurrency, isValidBudgetInput, MAX_BUDGET } from './fee-utils'
 
 interface Props {
   data: GigV3Data
@@ -11,11 +10,6 @@ interface Props {
   onBack: () => void
   onNext: () => void
 }
-
-const PLATFORM_FEE_RATE = 0.12
-const PROCESSING_FEE_RATE = 0.017
-const GST_RATE = 0.10
-const MINIMUM_WAGE = 24.10 // AUS minimum wage per hour
 
 function Tooltip({ text }: { text: string }) {
   return (
@@ -28,39 +22,38 @@ function Tooltip({ text }: { text: string }) {
   )
 }
 
-function fmt(n: number): string {
-  return n.toFixed(2)
-}
-
 export default function Step3Budget({ data, patch, onBack, onNext }: Props) {
   const [budgetTouched, setBudgetTouched] = useState(false)
 
-  const totalBudget = parseFloat(data.budget)
-  const isValid = !isNaN(totalBudget) && totalBudget > 0
+  const budgetNum = parseFloat(data.budget)
+  const hasValidFormat = data.budget !== '' && isValidBudgetInput(data.budget)
+  const isPositive = hasValidFormat && !isNaN(budgetNum) && budgetNum > 0
+  const isUnderMax = isPositive && budgetNum <= MAX_BUDGET
+  const isValid = isPositive && isUnderMax
 
-  const budgetError =
-    budgetTouched && (data.budget === '' || !isValid)
-      ? 'Please enter a budget greater than $0'
-      : undefined
+  const budgetError = (() => {
+    if (!budgetTouched) return undefined
+    if (data.budget === '' || !hasValidFormat || !isPositive) {
+      return 'Please enter a valid budget greater than $0.00'
+    }
+    if (!isUnderMax) {
+      return `Budget cannot exceed $${MAX_BUDGET.toLocaleString()}`
+    }
+    return undefined
+  })()
 
   const breakdown = useMemo(() => {
     if (!isValid) return null
+    return calculateFeeBreakdown(budgetNum)
+  }, [budgetNum, isValid])
 
-    const platformFee = totalBudget * PLATFORM_FEE_RATE
-    const processingFee = totalBudget * PROCESSING_FEE_RATE
-    const gst = (platformFee + processingFee) * GST_RATE
-    const studentPayment = totalBudget - platformFee - processingFee - gst
-    const maxHours = Math.floor((totalBudget / 1.12) / MINIMUM_WAGE)
-
-    return {
-      studentPayment,
-      platformFee,
-      processingFee,
-      gst,
-      total: totalBudget,
-      maxHours,
+  function handleBudgetChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const val = e.target.value
+    // Allow empty (so user can clear) or valid partial numeric input
+    if (val === '' || /^\d+(\.\d{0,2})?$/.test(val)) {
+      patch({ budget: val })
     }
-  }, [totalBudget, isValid])
+  }
 
   function handleContinue() {
     setBudgetTouched(true)
@@ -72,7 +65,7 @@ export default function Step3Budget({ data, patch, onBack, onNext }: Props) {
       <div className="flex flex-col gap-6">
         <div>
           <h2 className="text-[var(--text-xl)] font-bold text-m3-on-surface">
-            Perfect! What's your total budget?
+            Perfect! What's your budget?
           </h2>
           <p className="text-[var(--text-sm)] text-m3-on-surface-variant mt-1">
             I'll show you the breakdown
@@ -83,19 +76,15 @@ export default function Step3Budget({ data, patch, onBack, onNext }: Props) {
           variant="outlined"
           className="p-4 md:p-5 flex flex-col gap-4 bg-m3-surface-container-lowest overflow-visible"
         >
-          <div className="flex items-center">
-            <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface">
-              Total Budget
-            </p>
-            <Tooltip text="Fees included are platform, processing fee, and GST" />
-          </div>
+          <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface">
+            My Budget
+          </p>
           <TextField
             variant="outlined"
-            type="number"
-            label="Enter total budget ($)"
-            placeholder="e.g., 500"
+            label="Student payment (incl. super)"
+            placeholder="e.g., 500.00"
             value={data.budget}
-            onChange={e => patch({ budget: e.target.value })}
+            onChange={handleBudgetChange}
             onBlur={() => setBudgetTouched(true)}
             error={!!budgetError}
             errorText={budgetError}
@@ -110,62 +99,38 @@ export default function Step3Budget({ data, patch, onBack, onNext }: Props) {
             className="p-4 md:p-5 flex flex-col gap-3 bg-m3-surface-container-lowest overflow-visible"
           >
             <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface">
-              Budget Breakdown
+              Cost Breakdown
             </p>
 
             <div className="flex flex-col gap-2">
               <div className="flex justify-between text-[var(--text-sm)]">
-                <span className="text-m3-on-surface-variant">Student payment</span>
-                <span className="text-m3-on-surface font-medium">${fmt(breakdown.studentPayment)}</span>
+                <span className="text-m3-on-surface-variant">Student payment (incl. super)</span>
+                <span className="text-m3-on-surface font-medium">{formatCurrency(breakdown.studentPayment)}</span>
               </div>
               <div className="flex justify-between text-[var(--text-sm)]">
-                <span className="text-m3-on-surface-variant">Platform fee (12%)</span>
-                <span className="text-m3-on-surface font-medium">${fmt(breakdown.platformFee)}</span>
+                <span className="text-m3-on-surface-variant">Alumable Service Fee (12%)</span>
+                <span className="text-m3-on-surface font-medium">{formatCurrency(breakdown.serviceFee)}</span>
               </div>
               <div className="flex justify-between text-[var(--text-sm)]">
                 <span className="text-m3-on-surface-variant">Processing fee (1.7%)</span>
-                <span className="text-m3-on-surface font-medium">${fmt(breakdown.processingFee)}</span>
+                <span className="text-m3-on-surface font-medium">{formatCurrency(breakdown.processingFee)}</span>
               </div>
               <div className="flex justify-between items-center text-[var(--text-sm)]">
                 <span className="flex items-center text-m3-on-surface-variant">
                   GST (10%)
-                  <Tooltip text="GST is charged on both platform and processing fee" />
+                  <Tooltip text="GST is charged on the combined Alumable Service Fee and Processing fee" />
                 </span>
-                <span className="text-m3-on-surface font-medium">${fmt(breakdown.gst)}</span>
+                <span className="text-m3-on-surface font-medium">{formatCurrency(breakdown.gst)}</span>
               </div>
 
               <hr className="border-m3-outline-variant my-1" />
 
               <div className="flex justify-between text-[var(--text-base)]">
-                <span className="font-semibold text-m3-on-surface">Total</span>
-                <span className="font-bold text-m3-on-surface">${fmt(breakdown.total)}</span>
+                <span className="font-semibold text-m3-on-surface">Total Gig Cost</span>
+                <span className="font-bold text-m3-on-surface">{formatCurrency(breakdown.total)}</span>
               </div>
             </div>
           </Card>
-        )}
-
-        {/* Hours Summary */}
-        {breakdown && (
-          <>
-            <div className="rounded-m3-md bg-m3-primary-container px-5 py-4 text-center">
-              <p className="text-[var(--text-lg)] font-bold text-m3-on-primary-container">
-                Your student can work up to{' '}
-                <span className="text-m3-primary">{breakdown.maxHours} hours</span>
-              </p>
-            </div>
-            <p className="text-[var(--text-xs)] text-m3-on-surface-variant px-1">
-              The number of hours your student can work is calculated based on your total budget and the current minimum wage (see{' '}
-              <a
-                href="https://www.fairwork.gov.au"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-m3-primary hover:underline"
-              >
-                fairwork.gov.au
-              </a>
-              ).
-            </p>
-          </>
         )}
       </div>
 

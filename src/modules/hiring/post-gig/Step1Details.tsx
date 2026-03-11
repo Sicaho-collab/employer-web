@@ -1,9 +1,7 @@
 import { useState, useRef } from 'react'
 import { simulateAI, SKILL_LEVEL_LABEL } from './gigUtils'
 import type { WizardState, SkillLevel } from './gigUtils'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { TextField } from '@/components/ui/text-field'
+import { Button, Card, TextField } from '@sicaho-collab/m3-design-system'
 
 const SKILL_LEVELS: SkillLevel[] = [1, 2, 3]
 

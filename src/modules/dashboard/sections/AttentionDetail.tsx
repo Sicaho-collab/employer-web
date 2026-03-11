@@ -1,8 +1,7 @@
 // Detail view for "Check what needs attention" — full prioritized list with categories.
 import { useNavigate } from 'react-router-dom'
 import { AlertTriangle, ArrowLeft, CheckCircle2 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Button, Badge } from '@sicaho-collab/m3-design-system'
 import type { Gig } from '@/types/gig'
 import {
   GigStage,

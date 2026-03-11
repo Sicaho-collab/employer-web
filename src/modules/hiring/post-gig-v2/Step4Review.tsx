@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Button, Card } from '@sicaho-collab/m3-design-system'
 import type { GigData } from './Step1Task'
 
 interface Props {

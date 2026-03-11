@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Button, Card } from '@sicaho-collab/m3-design-system'
 import type { GigV3Data } from './PostGigV3Page'
+import { calculateFeeBreakdown, formatCurrency as fmtCur } from './fee-utils'
 
 interface Props {
   data: GigV3Data
@@ -15,7 +15,7 @@ function formatDate(iso: string): string {
   return `${d}/${m}/${y}`
 }
 
-function formatCurrency(value: string): string {
+function formatBudgetCurrency(value: string): string {
   const num = parseFloat(value)
   if (isNaN(num)) return '$0.00'
   return `$${num.toFixed(2)}`
@@ -31,6 +31,11 @@ export default function Step5Review({ data, onBack, onGoToStep }: Props) {
   const [publishing, setPublishing] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+
+  const budgetNum = parseFloat(data.budget)
+  const breakdown = !isNaN(budgetNum) && budgetNum > 0
+    ? calculateFeeBreakdown(budgetNum)
+    : null
 
   async function handlePublish() {
     setPublishing(true)
@@ -116,7 +121,16 @@ export default function Step5Review({ data, onBack, onGoToStep }: Props) {
           onEdit={() => onGoToStep(3)}
           disabled={publishing}
         >
-          <FieldRow label="Total Budget" value={formatCurrency(data.budget)} />
+          <FieldRow label="Student Payment (incl. super)" value={formatBudgetCurrency(data.budget)} />
+          {breakdown && (
+            <>
+              <FieldRow label="Alumable Service Fee (12%)" value={fmtCur(breakdown.serviceFee)} />
+              <FieldRow label="Processing Fee (1.7%)" value={fmtCur(breakdown.processingFee)} />
+              <FieldRow label="GST (10%)" value={fmtCur(breakdown.gst)} />
+              <hr className="border-m3-outline-variant my-1" />
+              <FieldRow label="Total Gig Cost" value={fmtCur(breakdown.total)} />
+            </>
+          )}
         </SummaryCard>
 
         {/* Preferences Summary */}
@@ -179,7 +193,7 @@ export default function Step5Review({ data, onBack, onGoToStep }: Props) {
   )
 }
 
-/* ── Shared sub-components ── */
+/* -- Shared sub-components -- */
 
 function SummaryCard({
   title,

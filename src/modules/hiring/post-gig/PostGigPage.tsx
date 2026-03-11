@@ -10,7 +10,7 @@ import Step5ReviewPublish  from './Step5ReviewPublish'
 import Step6Confirmation   from './Step6Confirmation'
 import { INITIAL_WIZARD_STATE, simulateAI } from './gigUtils'
 import type { WizardState } from './gigUtils'
-import { Progress } from '@/components/ui/progress'
+import { Progress } from '@sicaho-collab/m3-design-system'
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Step definitions for the 5-step stepper

@@ -1,8 +1,7 @@
 import { useMemo } from 'react'
 import { calcBudget, calcMinBudget, fmt, FLOOR_HOURLY_RATE } from './gigUtils'
 import type { WizardState } from './gigUtils'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Button, Card } from '@sicaho-collab/m3-design-system'
 
 interface Props {
   wizard: WizardState

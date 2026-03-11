@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { Plus, Paperclip, Image, Code } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { ButtonColorful } from '@/components/ui/button-colorful'
+import { ButtonColorful } from '@sicaho-collab/m3-design-system'
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Attachment Menu
