@@ -96,6 +96,7 @@ export default function Step5Review({ data, onBack, onGoToStep }: Props) {
           title="Details"
           onEdit={() => onGoToStep(1)}
           disabled={publishing}
+
         >
           <FieldRow label="Gig Title" value={data.title} />
           <FieldRow label="Description" value={data.description} />
@@ -110,6 +111,7 @@ export default function Step5Review({ data, onBack, onGoToStep }: Props) {
           title="Timeline"
           onEdit={() => onGoToStep(2)}
           disabled={publishing}
+
         >
           <FieldRow label="Start Date" value={formatDate(data.startDate)} />
           <FieldRow label="End Date" value={formatDate(data.endDate)} />
@@ -120,6 +122,7 @@ export default function Step5Review({ data, onBack, onGoToStep }: Props) {
           title="Budget"
           onEdit={() => onGoToStep(3)}
           disabled={publishing}
+
         >
           <FieldRow label="Student Payment (incl. super)" value={formatBudgetCurrency(data.budget)} />
           {breakdown && (
@@ -138,6 +141,7 @@ export default function Step5Review({ data, onBack, onGoToStep }: Props) {
           title="Preferences"
           onEdit={() => onGoToStep(4)}
           disabled={publishing}
+
         >
           <FieldRow
             label="Gig Type"

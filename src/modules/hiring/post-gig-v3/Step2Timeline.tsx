@@ -93,7 +93,7 @@ export default function Step2Timeline({ data, patch, onBack, onNext }: Props) {
 
         <Card
           variant="outlined"
-          className="p-4 md:p-5 flex flex-col gap-5 bg-m3-surface/80 backdrop-blur-sm shadow-lg border-m3-outline-variant/50"
+          className="p-4 md:p-5 flex flex-col gap-5 bg-m3-surface-container-lowest"
         >
           <DateRangePicker
             inline
