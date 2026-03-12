@@ -1,6 +1,6 @@
 import { AlertTriangle } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { Card, CardHeader, CardTitle, CardContent, CardFooter, Button, Badge } from '@sicaho-collab/m3-design-system'
+import { Card, CardHeader, CardTitle, CardContent, CardFooter, Button, Badge } from '@sicaho-collab/ui-web'
 import { CheckCircle2 } from 'lucide-react'
 import type { Gig } from '@/types/gig'
 import {

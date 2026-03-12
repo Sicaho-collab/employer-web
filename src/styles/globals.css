@@ -1,7 +1,7 @@
 @import "tailwindcss";
-@source "../../node_modules/@sicaho-collab/m3-design-system/dist";
+@source "../../node_modules/@sicaho-collab/ui-web/dist";
 @source inline("hover:scale-105 active:scale-95 shadow-lg shadow-md backdrop-blur-sm bg-m3-primary/10 text-m3-primary ring-1 ring-m3-primary/30 shadow-m3-primary/25 hover:border-m3-primary/50 border-m3-outline-variant/50 bg-m3-surface/80");
-@import "@sicaho-collab/m3-design-system/styles";
+@import "@sicaho-collab/ui-web/styles";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Design Tokens — Enterprise SaaS (app-specific overrides)

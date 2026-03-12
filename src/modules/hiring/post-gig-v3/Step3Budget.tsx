@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { Info } from 'lucide-react'
-import { Button, Card } from '@sicaho-collab/m3-design-system'
+import { Button, Card } from '@sicaho-collab/ui-web'
 import { TextField } from '@/components/ui/text-field'
 import type { GigV3Data } from './PostGigV3Page'
 import { calculateFeeBreakdown, formatCurrency, isValidBudgetInput, MAX_BUDGET } from './fee-utils'

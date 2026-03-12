@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Calendar } from 'lucide-react'
-import { Button, Card, Checkbox } from '@sicaho-collab/m3-design-system'
+import { Button, Card, Checkbox } from '@sicaho-collab/ui-web'
 import { TextField } from '@/components/ui/text-field'
 import type { GigV3Data } from './PostGigV3Page'
 

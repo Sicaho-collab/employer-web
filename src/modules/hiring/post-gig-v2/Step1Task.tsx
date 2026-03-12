@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Card, TextField } from '@sicaho-collab/m3-design-system'
+import { Button, Card, TextField } from '@sicaho-collab/ui-web'
 
 export interface GigData {
   title: string

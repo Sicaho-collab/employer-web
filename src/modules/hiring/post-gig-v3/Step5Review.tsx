@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Card } from '@sicaho-collab/m3-design-system'
+import { Button, Card } from '@sicaho-collab/ui-web'
 import type { GigV3Data } from './PostGigV3Page'
 import { calculateFeeBreakdown, formatCurrency as fmtCur } from './fee-utils'
 

@@ -1,6 +1,6 @@
 import { Zap, PlusCircle, FileText, Users, Search, BarChart3, Settings } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { Card, CardHeader, CardTitle, CardContent, Button } from '@sicaho-collab/m3-design-system'
+import { Card, CardHeader, CardTitle, CardContent, Button } from '@sicaho-collab/ui-web'
 
 const QUICK_ACTIONS = [
   { label: 'Post a Gig',      icon: PlusCircle, route: '/hiring/new' },

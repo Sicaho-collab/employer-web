@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { LogOut, LayoutDashboard, Briefcase, Wallet, Building2 } from 'lucide-react'
-import { NavigationRail, Card, Button } from '@sicaho-collab/m3-design-system'
-import type { NavRailItem } from '@sicaho-collab/m3-design-system'
+import { NavigationRail, Card, Button } from '@sicaho-collab/ui-web'
+import type { NavRailItem } from '@sicaho-collab/ui-web'
 
 // Top-level navigation — max 4 modules per IA spec
 const NAV_ITEMS: { to: string; label: string; icon: React.ReactNode }[] = [

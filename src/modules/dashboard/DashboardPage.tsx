@@ -1,7 +1,7 @@
 import { Clock, AlertCircle, Zap, PlusCircle, Receipt } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { BentoCard, BentoGrid } from '@/components/ui/bento-grid'
-import { Button } from '@sicaho-collab/m3-design-system'
+import { Button } from '@sicaho-collab/ui-web'
 import { useAuth } from '@/modules/auth/AuthContext'
 import GreetingHeader from './components/GreetingHeader'
 

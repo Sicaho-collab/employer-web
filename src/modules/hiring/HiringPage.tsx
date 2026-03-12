@@ -4,7 +4,7 @@ import PageHeader from '@/components/ui/PageHeader'
 import GigListView from './GigListView'
 import type { GigViewTab, Gig } from '@/types/gig'
 import { GigStage, OfferStatus, PaymentStatus, TimesheetStatus, ErrorStatus } from '@/types/gig'
-import { Button } from '@sicaho-collab/m3-design-system'
+import { Button } from '@sicaho-collab/ui-web'
 import { cn } from '@/lib/utils'
 
 // View tabs per IA spec

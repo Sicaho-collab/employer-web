@@ -1,7 +1,7 @@
 // Detail view for "Continue where I left off" — shows full recent activity list.
 import { useNavigate } from 'react-router-dom'
 import { Clock, ArrowLeft } from 'lucide-react'
-import { Button } from '@sicaho-collab/m3-design-system'
+import { Button } from '@sicaho-collab/ui-web'
 import StageBadge from '@/components/ui/StageBadge'
 import type { Gig } from '@/types/gig'
 import {

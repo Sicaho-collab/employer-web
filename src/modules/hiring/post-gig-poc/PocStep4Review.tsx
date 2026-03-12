@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Card, CardContent, Button } from '@sicaho-collab/m3-design-system'
+import { Card, CardContent, Button } from '@sicaho-collab/ui-web'
 import type { PocGigData } from "./PocStep1Task"
 
 interface Props {

@@ -1,5 +1,5 @@
 import type { WizardState } from './gigUtils'
-import { Button, Card, TextField } from '@sicaho-collab/m3-design-system'
+import { Button, Card, TextField } from '@sicaho-collab/ui-web'
 
 interface Props {
   wizard: WizardState

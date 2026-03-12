@@ -11,8 +11,14 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
     },
   },
+  optimizeDeps: {
+    exclude: ['@sicaho-collab/m3-design-system'],
+  },
   server: {
     port: process.env.PORT ? parseInt(process.env.PORT) : 5174,
     strictPort: false,
+    watch: {
+      ignored: ['!**/node_modules/@sicaho-collab/**'],
+    },
   },
 })

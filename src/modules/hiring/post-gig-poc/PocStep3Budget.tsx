@@ -1,4 +1,4 @@
-import { Card, CardContent, TextField, Button } from '@sicaho-collab/m3-design-system'
+import { Card, CardContent, TextField, Button } from '@sicaho-collab/ui-web'
 import type { PocGigData } from "./PocStep1Task"
 
 interface Props {

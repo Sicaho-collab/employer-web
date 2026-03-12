@@ -1,6 +1,6 @@
 import { fmt } from './gigUtils'
 import type { WizardState } from './gigUtils'
-import { Button, Card } from '@sicaho-collab/m3-design-system'
+import { Button, Card } from '@sicaho-collab/ui-web'
 
 interface Props {
   wizard:         WizardState

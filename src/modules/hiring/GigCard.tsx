@@ -3,7 +3,7 @@ import type { Gig } from '@/types/gig'
 import StageBadge from '@/components/ui/StageBadge'
 import PaymentStatusBadge from '@/components/ui/PaymentStatusBadge'
 import { getGigCTA, getGigAttentionInfo } from '@/utils/gigDisplay'
-import { Card, Button } from '@sicaho-collab/m3-design-system'
+import { Card, Button } from '@sicaho-collab/ui-web'
 import { cn } from '@/lib/utils'
 
 interface GigCardProps {

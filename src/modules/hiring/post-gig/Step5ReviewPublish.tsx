@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { calcBudget, fmt, generateGigId, FLOOR_HOURLY_RATE } from './gigUtils'
 import type { WizardState } from './gigUtils'
-import { Button, Card, TextField, Checkbox } from '@sicaho-collab/m3-design-system'
+import { Button, Card, TextField, Checkbox } from '@sicaho-collab/ui-web'
 
 interface Props {
   wizard:   WizardState
