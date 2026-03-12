@@ -41,7 +41,7 @@ export default function Step5Review({ data, onBack, onGoToStep }: Props) {
     setPublishing(true)
     setError(null)
     try {
-      await new Promise<void>((resolve, reject) => {
+      await new Promise<void>((resolve) => {
         setTimeout(() => {
           // Simulate success
           resolve()

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { simulateAI, SKILL_LEVEL_LABEL } from './gigUtils'
 import type { WizardState, SkillLevel } from './gigUtils'
 import { Button, Card, TextField } from '@sicaho-collab/ui-web'
@@ -13,7 +13,7 @@ interface Props {
 
 export default function Step1Details({ wizard, patch, onNext }: Props) {
 
-  const [aiLoading, setAiLoading] = useState(false)
+  const [, setAiLoading] = useState(false)
   const [newSkillName, setNewSkillName] = useState('')
   const [dragIndex, setDragIndex] = useState<number | null>(null)
   const [hoverIndex, setHoverIndex] = useState<number | null>(null)

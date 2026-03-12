@@ -9,10 +9,6 @@ interface Props {
   onNext: () => void
 }
 
-function todayISO(): string {
-  return new Date().toISOString().split('T')[0]
-}
-
 function countBusinessDays(start: string, end: string): number {
   const s = new Date(start)
   const e = new Date(end)

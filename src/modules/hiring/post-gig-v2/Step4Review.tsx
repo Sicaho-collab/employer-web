@@ -35,7 +35,7 @@ export default function Step4Review({ data, onBack, onGoToStep }: Props) {
     setError(null)
     try {
       // Simulate API call
-      await new Promise((resolve, reject) => {
+      await new Promise((resolve) => {
         setTimeout(() => {
           // Simulate success (swap resolve/reject for error testing)
           resolve(undefined)
