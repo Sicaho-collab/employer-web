@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import type { Gig } from '@/types/gig'
+import { GigStage } from '@/types/gig'
 import StageBadge from '@/components/ui/StageBadge'
-import PaymentStatusBadge from '@/components/ui/PaymentStatusBadge'
-import { getGigCTA, getGigAttentionInfo } from '@/utils/gigDisplay'
+import { getGigCTA, getGigAttentionInfo, getOfferDisplayConfig } from '@/utils/gigDisplay'
 import { Card, Button } from '@sicaho-collab/ui-web'
 import { cn } from '@/lib/utils'
+import { Calendar, Users, AlertTriangle } from 'lucide-react'
 
 interface GigCardProps {
   gig: Gig
@@ -15,6 +16,9 @@ export default function GigCard({ gig }: GigCardProps) {
   const ctaLabel    = getGigCTA(gig)
   const attention   = getGigAttentionInfo(gig)
   const isError     = attention.hasError
+  const offerConfig = getOfferDisplayConfig(gig)
+
+  const isActiveGig = gig.stage === GigStage.ACTIVE
 
   const handleClick = () => navigate(`/hiring/${gig.id}`)
   const onCta       = () => navigate(`/hiring/${gig.id}`)
@@ -23,69 +27,66 @@ export default function GigCard({ gig }: GigCardProps) {
     <Card
       variant="outlined"
       className={cn(
-        "group relative p-4 md:p-5 flex flex-col gap-4 cursor-pointer overflow-hidden",
-        "transition-all duration-300 ease-out",
-        "hover:-translate-y-1 hover:shadow-m3-2",
-        isError && "border-red-200"
+        "group relative cursor-pointer overflow-hidden",
+        "bg-m3-surface border border-m3-outline-variant/60 shadow-soft rounded-m3-md",
+        "transition-all duration-200 ease-out",
+        "hover:shadow-m3-1 hover:-translate-y-0.5",
+        isError && "border-red-300"
       )}
       onClick={handleClick}
     >
-      {/* ── Error / Attention Banner ── */}
-      {attention.hasError && (
-        <div className="flex items-start gap-2 bg-red-50 border border-red-200 rounded-m3-xs px-3 py-2">
-          <span className="text-xs text-red-700 leading-relaxed">{attention.message}</span>
+      <div className="px-4 py-3 md:px-5 md:py-4">
+        {/* ── Error banner ── */}
+        {isError && (
+          <div role="alert" className="flex items-center gap-2 mb-2 px-2 py-1.5 rounded-m3-xs bg-red-50 border border-red-200">
+            <AlertTriangle className="w-3.5 h-3.5 text-red-500 flex-shrink-0" />
+            <span className="text-xs font-medium text-red-700">{attention.message}</span>
+          </div>
+        )}
+
+        {/* ── Row: title + CTA (always visible) ── */}
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="text-sm font-semibold text-m3-on-surface leading-snug min-w-0 truncate transition-colors duration-200 group-hover:text-m3-primary">
+            {gig.title}
+          </h3>
+          <Button
+            variant={isError ? 'tonal' : isActiveGig ? 'filled' : 'filled'}
+            size="sm"
+            onClick={e => { e.stopPropagation(); onCta() }}
+            className={cn(
+              "flex-shrink-0",
+              isError && 'text-m3-error',
+              isActiveGig && 'bg-emerald-600 hover:bg-emerald-700'
+            )}
+          >
+            {ctaLabel}
+          </Button>
         </div>
-      )}
 
-      {/* ── Card Header: title + id ── */}
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="text-base font-semibold text-m3-on-surface leading-snug transition-colors duration-200 group-hover:text-m3-primary">
-          {gig.title}
-        </h3>
-        <span className="text-xs text-m3-on-surface-variant font-mono bg-m3-surface-container rounded px-1.5 py-0.5 flex-shrink-0">
-          {gig.id}
-        </span>
-      </div>
-
-      {/* ── Badges + Timeline ── */}
-      <div className="flex items-center justify-between gap-3 flex-wrap">
-        <div className="flex items-center gap-2 flex-wrap">
+        {/* ── Meta row: badges, timeline, applicants ── */}
+        <div className="flex flex-wrap items-center gap-2 mt-2">
           <StageBadge gig={gig} />
-          <PaymentStatusBadge status={gig.payment_status} />
+          {offerConfig && (
+            <span
+              style={{ background: offerConfig.bg, color: offerConfig.color }}
+              className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold tracking-wide"
+            >
+              {offerConfig.label}
+            </span>
+          )}
+          {gig.start_date && (
+            <div className="flex items-center gap-1.5 text-xs text-m3-on-surface-variant">
+              <Calendar className="w-3.5 h-3.5" />
+              <span>{gig.start_date}{gig.end_date ? ` \u2192 ${gig.end_date}` : ''}</span>
+            </div>
+          )}
+          {gig.stage === GigStage.POSTED && gig.is_published && (
+            <div className="flex items-center gap-1.5 text-xs text-m3-on-surface-variant">
+              <Users className="w-3.5 h-3.5" />
+              <span>{gig.applicant_count} applicant{gig.applicant_count !== 1 ? 's' : ''}</span>
+            </div>
+          )}
         </div>
-        {gig.start_date && (
-          <span className="text-xs border border-m3-outline-variant rounded-m3-full px-2 py-0.5 text-m3-on-surface-variant">
-            {gig.start_date}{gig.end_date ? ` → ${gig.end_date}` : ''}
-          </span>
-        )}
-      </div>
-
-      {/* ── Stats ── */}
-      <div className="flex flex-wrap gap-4 text-xs text-m3-on-surface-variant">
-        <span>
-          Applicants: <strong className="text-m3-on-surface font-medium">{gig.applicant_count}</strong>
-        </span>
-        {gig.matched_student_id && (
-          <span>
-            Match: <strong className="text-m3-on-surface font-medium">Talent matched</strong>
-          </span>
-        )}
-      </div>
-
-      {/* ── Primary CTA — slides up on hover ── */}
-      <div className={cn(
-        "pt-3 border-t border-m3-outline-variant",
-        "translate-y-2 opacity-0 transition-all duration-300 ease-out",
-        "group-hover:translate-y-0 group-hover:opacity-100"
-      )}>
-        <Button
-          variant={isError ? 'tonal' : 'filled'}
-          size="sm"
-          onClick={e => { e.stopPropagation(); onCta() }}
-          className={isError ? 'text-m3-error' : ''}
-        >
-          {ctaLabel} →
-        </Button>
       </div>
     </Card>
   )

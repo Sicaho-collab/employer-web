@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Button, Card } from '@sicaho-collab/ui-web'
+import { Button, Card, Alert } from '@sicaho-collab/ui-web'
+import { AnimatePresence } from 'framer-motion'
 import type { GigData } from './Step1Task'
 
 interface Props {
@@ -22,6 +23,7 @@ function formatCurrency(value: string): string {
 
 export default function Step4Review({ data, onBack, onGoToStep }: Props) {
   const [publishing, setPublishing] = useState(false)
+  const [published, setPublished] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const budgetNum = parseFloat(data.budget)
@@ -43,7 +45,7 @@ export default function Step4Review({ data, onBack, onGoToStep }: Props) {
       })
       // On success, redirect would happen here
       // navigate('/hiring', { state: { success: 'Your gig has been published.' } })
-      window.alert('Your gig has been published.')
+      setPublished(true)
     } catch {
       setError('Something went wrong. Please try again.')
     } finally {
@@ -128,6 +130,17 @@ export default function Step4Review({ data, onBack, onGoToStep }: Props) {
           {error}
         </div>
       )}
+
+      <AnimatePresence>
+        {published && (
+          <Alert
+            variant="success"
+            title="Gig published"
+            description="Your gig has been published successfully."
+            onClose={() => setPublished(false)}
+          />
+        )}
+      </AnimatePresence>
 
       <div className="flex justify-between gap-3 pt-4 border-t border-m3-outline-variant mt-6">
         <Button variant="outlined" disabled={publishing} onClick={onBack}>

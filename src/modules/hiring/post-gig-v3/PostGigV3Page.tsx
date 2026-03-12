@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { cn } from '@/lib/utils'
 import M3Stepper from '@/components/ui/M3Stepper'
-import { ChatInput } from '@/components/ui/bolt-style-chat'
+import { AIPromptBox } from '@/components/ui/ai-prompt-box'
 import Step1Details from './Step1Details'
 import Step2Timeline from './Step2Timeline'
 import Step3Budget from './Step3Budget'
@@ -87,17 +87,16 @@ export default function PostGigV3Page() {
       {/* Pre-Step */}
       {step === 0 && (
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-60px-48px-48px)]">
-          <h1 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <h1
+            className="text-2xl md:text-3xl font-bold text-center mb-8 bg-clip-text text-transparent"
+            style={{ backgroundImage: 'linear-gradient(to right, #9A76BE, #C084FC, #E879A0)' }}
+          >
             What do you need help with?
           </h1>
-          <ChatInput
-            value={data.prompt}
-            onChange={v => patch({ prompt: v })}
-            onSubmit={() => setStep(1)}
+          <AIPromptBox
+            onSend={(msg) => { patch({ prompt: msg }); setStep(1) }}
             placeholder="Describe the work you need done, and I will help you create the perfect gig to find the right talent"
-            submitLabel="Get Started"
-            maxLength={500}
-            minLength={10}
+            sendLabel="Get Started"
             className="w-full max-w-[640px]"
           />
           <div className="text-center mt-4 text-xs" style={{ color: 'var(--md-sys-color-outline)' }}>

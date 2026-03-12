@@ -88,20 +88,23 @@ export interface Gig {
 }
 
 // Derived view states (computed, never stored)
+// V3 Lifecycle tabs — use computed labels, not raw stage names
 export type GigViewTab =
   | 'ALL'
   | 'DRAFT'
-  | 'POSTED'
-  | 'ACTIVE'
-  | 'DONE'
-  | 'CLOSED'
+  | 'HIRING'       // Stage = POSTED (published)
+  | 'SECURED'      // Stage = MATCHED ("Talent Secured")
+  | 'IN_PROGRESS'  // Stage = ACTIVE
+  | 'COMPLETED'    // Stage = DONE
+  | 'CLOSED'       // Stage = CLOSED
 
 // Primary CTA per stage — drives action-first UX.
 // For DONE, refine further by payment_status via getGigCTA() in utils/gigDisplay.ts
+// V3: "Mark as Complete" is the prominent CTA on ACTIVE gigs — not buried in a sub-menu
 export const GIG_STAGE_CTA: Record<GigStage, string> = {
   [GigStage.POSTED]:  'Review Applicants',
   [GigStage.MATCHED]: 'Send Offer',
-  [GigStage.ACTIVE]:  'View Timesheet',
+  [GigStage.ACTIVE]:  'Mark as Complete',
   [GigStage.DONE]:    'Release Payment',
   [GigStage.CLOSED]:  'View Summary',
 }
