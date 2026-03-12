@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Button, Card, TextField, Chip } from '@sicaho-collab/m3-design-system'
+import { Button, Card, Chip } from '@sicaho-collab/m3-design-system'
+import { TextField } from '@/components/ui/text-field'
 import type { GigV3Data } from './PostGigV3Page'
 
 const CAPABILITY_OPTIONS = [
