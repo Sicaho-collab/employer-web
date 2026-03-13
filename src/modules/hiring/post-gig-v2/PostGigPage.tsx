@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import M3Stepper from '@/components/ui/M3Stepper'
+import { M3Stepper } from '@sicaho-collab/ui-web'
 import Step1Task, { INITIAL_GIG_DATA } from './Step1Task'
 import Step2Schedule from './Step2Schedule'
 import Step3Budget from './Step3Budget'

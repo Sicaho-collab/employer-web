@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { cn } from '@/lib/utils'
-import M3Stepper from '@/components/ui/M3Stepper'
+import { M3Stepper } from '@sicaho-collab/ui-web'
 import { AIPromptBox } from '@/components/ui/ai-prompt-box'
 import Step1Details from './Step1Details'
 import Step2Timeline from './Step2Timeline'
@@ -70,7 +70,7 @@ export default function PostGigV3Page() {
 
   const goNext = () => setStep(s => Math.min(s + 1, TOTAL_STEPS))
   const goBack = () => setStep(s => Math.max(s - 1, step <= 1 ? 0 : 1))
-  const goToStep = (n: number) => setStep(n)
+
 
   return (
     <div className={cn("max-w-[900px] mx-auto px-4 md:px-6", step === 0 ? "py-0" : "py-6 md:py-8")}>
@@ -148,7 +148,6 @@ export default function PostGigV3Page() {
         <Step5Review
           data={data}
           onBack={goBack}
-          onGoToStep={goToStep}
         />
       )}
     </div>

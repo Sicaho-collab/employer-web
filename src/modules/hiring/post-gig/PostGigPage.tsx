@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import M3Stepper           from '@/components/ui/M3Stepper'
+import { M3Stepper } from '@sicaho-collab/ui-web'
 import AIEntryPage         from './AIEntryPage'
 import Step1Details        from './Step1Details'
 import Step2Timeline       from './Step2Timeline'

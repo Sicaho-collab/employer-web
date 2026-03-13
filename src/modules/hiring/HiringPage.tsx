@@ -215,6 +215,61 @@ export default function HiringPage() {
         }
       />
 
+      {/* ── Needs Attention Banner (full width, above split) ── */}
+      {attentionItems.length > 0 && (
+        <div
+          role="alert"
+          className="mb-6 rounded-m3-md border border-m3-outline-variant bg-m3-surface-container-lowest p-4"
+        >
+          <h2 className="text-sm font-semibold text-m3-on-surface mb-3">
+            Needs Your Attention
+          </h2>
+          <div className="flex flex-col gap-2">
+            {attentionItems.map(item => {
+              const sev = SEVERITY_STYLES[item.severity] || SEVERITY_STYLES.info
+              return (
+                <div
+                  key={item.type}
+                  className={cn(
+                    "flex items-center justify-between gap-3 px-3 py-2.5 rounded-m3-xs border",
+                    sev.border, sev.bg
+                  )}
+                >
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={cn(
+                        "w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0",
+                        item.severity === 'error' ? 'bg-red-200 text-red-800' :
+                        item.severity === 'warning' ? 'bg-amber-200 text-amber-800' :
+                        'bg-blue-200 text-blue-800'
+                      )}
+                      aria-hidden
+                    >
+                      {sev.icon}
+                    </span>
+                    <span className={cn("text-sm font-medium", sev.text)}>
+                      {item.message}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      if (item.gigIds[0]) navigate(`/hiring/${item.gigIds[0]}`)
+                    }}
+                    className={cn(
+                      "text-xs font-semibold px-3 py-1 rounded-m3-full border transition-colors",
+                      sev.border, sev.text,
+                      "hover:bg-white/60"
+                    )}
+                  >
+                    Review
+                  </button>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
       {/* ── Split Layout: Stepper (left) + Content (right) ── */}
       <div className="flex flex-col md:flex-row gap-6">
 
@@ -235,61 +290,6 @@ export default function HiringPage() {
 
         {/* ── Right: Gig Content Area ── */}
         <main className="flex-1 min-w-0">
-
-          {/* ── Needs Attention Banner ── */}
-          {attentionItems.length > 0 && (
-            <div
-              role="alert"
-              className="mb-6 rounded-m3-md border border-m3-outline-variant bg-m3-surface-container-lowest p-4"
-            >
-              <h2 className="text-sm font-semibold text-m3-on-surface mb-3">
-                Needs Your Attention
-              </h2>
-              <div className="flex flex-col gap-2">
-                {attentionItems.map(item => {
-                  const sev = SEVERITY_STYLES[item.severity] || SEVERITY_STYLES.info
-                  return (
-                    <div
-                      key={item.type}
-                      className={cn(
-                        "flex items-center justify-between gap-3 px-3 py-2.5 rounded-m3-xs border",
-                        sev.border, sev.bg
-                      )}
-                    >
-                      <div className="flex items-center gap-2">
-                        <span
-                          className={cn(
-                            "w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0",
-                            item.severity === 'error' ? 'bg-red-200 text-red-800' :
-                            item.severity === 'warning' ? 'bg-amber-200 text-amber-800' :
-                            'bg-blue-200 text-blue-800'
-                          )}
-                          aria-hidden
-                        >
-                          {sev.icon}
-                        </span>
-                        <span className={cn("text-sm font-medium", sev.text)}>
-                          {item.message}
-                        </span>
-                      </div>
-                      <button
-                        onClick={() => {
-                          if (item.gigIds[0]) navigate(`/hiring/${item.gigIds[0]}`)
-                        }}
-                        className={cn(
-                          "text-xs font-semibold px-3 py-1 rounded-m3-full border transition-colors",
-                          sev.border, sev.text,
-                          "hover:bg-white/60"
-                        )}
-                      >
-                        Review
-                      </button>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          )}
 
           {/* ── Stage Header ── */}
           <div className="mb-4">

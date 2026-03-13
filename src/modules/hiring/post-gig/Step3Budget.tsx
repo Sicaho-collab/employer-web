@@ -35,7 +35,7 @@ export default function Step3Budget({ wizard, patch, onBack, onNext }: Props) {
             value={wizard.budget}
             min={MIN_BUDGET}
             step={10}
-            placeholder="e.g. 1000"
+            placeholder="1000"
             onChange={e => patch({ budget: e.target.value })}
           />
           <span className="text-sm text-m3-on-surface-variant flex-shrink-0">AUD</span>

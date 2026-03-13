@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Button, Card, Chip } from '@sicaho-collab/ui-web'
-import { TextField } from '@/components/ui/text-field'
+import { Button, Card, Chip, TextField } from '@sicaho-collab/ui-web'
 import type { GigV3Data } from './PostGigV3Page'
 
 const CAPABILITY_OPTIONS = [
@@ -83,7 +82,7 @@ export default function Step1Details({ data, patch, onNext }: Props) {
             <TextField
               variant="outlined"
               label="Gig Title"
-              placeholder="e.g., Campus Event Setup Assistant"
+              placeholder="Campus Event Setup Assistant"
               value={data.title}
               maxLength={100}
               onChange={e => patch({ title: e.target.value.slice(0, 100) })}

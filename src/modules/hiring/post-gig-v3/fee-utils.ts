@@ -28,7 +28,7 @@ export function calculateFeeBreakdown(budget: number): FeeBreakdown {
 }
 
 export function formatCurrency(n: number): string {
-  return `$${n.toFixed(2)}`
+  return `$${n.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 }
 
 /** Strict budget input validation: digits with optional up to 2 decimal places */

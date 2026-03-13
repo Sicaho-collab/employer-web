@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Card, Button, Chip, Checkbox } from '@sicaho-collab/ui-web'
-import { TextField } from '@/components/ui/text-field'
+import { Card, Button, Chip, Checkbox, TextField } from '@sicaho-collab/ui-web'
 import { Eye, EyeOff, AlertCircle, Check } from 'lucide-react'
 import {
   validateEmail,

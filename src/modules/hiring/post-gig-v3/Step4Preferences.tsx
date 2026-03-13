@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Calendar } from 'lucide-react'
-import { Button, Card, Checkbox } from '@sicaho-collab/ui-web'
-import { TextField } from '@/components/ui/text-field'
+import { Button, Card, Checkbox, DatePicker, TextField } from '@sicaho-collab/ui-web'
 import type { GigV3Data } from './PostGigV3Page'
 
 interface Props {
@@ -18,13 +16,6 @@ const LOCATION_LABELS: Record<string, string> = {
   hybrid: 'Hybrid',
 }
 
-/** Convert yyyy-mm-dd to dd/mm/yyyy */
-function toDisplay(iso: string): string {
-  if (!iso) return ''
-  const [y, m, d] = iso.split('-')
-  return `${d}/${m}/${y}`
-}
-
 /** Subtract N days from an ISO date string */
 function subtractDays(iso: string, days: number): string {
   const date = new Date(iso)
@@ -36,60 +27,6 @@ function todayISO(): string {
   return new Date().toISOString().split('T')[0]
 }
 
-interface DatePickerFieldProps {
-  id: string
-  label: string
-  value: string
-  min?: string
-  max?: string
-  error?: string
-  supportingText?: string
-  onBlur: () => void
-  onChange: (iso: string) => void
-}
-
-function DatePickerField({ id, label, value, min, max, error, supportingText, onBlur, onChange }: DatePickerFieldProps) {
-  return (
-    <div className="flex flex-col gap-2">
-      <label
-        htmlFor={id}
-        className="text-[var(--text-sm)] font-semibold text-m3-on-surface"
-      >
-        {label}
-      </label>
-      <div
-        className={`relative flex items-center w-full h-14 rounded-m3-xs border transition-colors focus-within:border-2 focus-within:border-m3-primary ${
-          error
-            ? 'border-m3-error focus-within:border-m3-error'
-            : 'border-m3-outline'
-        }`}
-      >
-        <input
-          id={id}
-          type="date"
-          min={min}
-          max={max}
-          value={value}
-          onChange={e => onChange(e.target.value)}
-          onBlur={onBlur}
-          className="absolute inset-0 w-full h-full px-4 bg-transparent text-transparent cursor-pointer outline-none [color-scheme:light] [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full"
-        />
-        <span className={`px-4 text-[var(--text-base)] pointer-events-none ${
-          value ? 'text-m3-on-surface' : 'text-m3-on-surface-variant'
-        }`}>
-          {value ? toDisplay(value) : 'dd/mm/yyyy'}
-        </span>
-        <Calendar className="absolute right-4 h-5 w-5 text-m3-on-surface-variant pointer-events-none" />
-      </div>
-      {error && (
-        <p className="text-[var(--text-xs)] text-m3-error" role="alert">{error}</p>
-      )}
-      {!error && supportingText && (
-        <p className="text-[var(--text-xs)] text-m3-on-surface-variant">{supportingText}</p>
-      )}
-    </div>
-  )
-}
 
 export default function Step4Preferences({
   data,
@@ -204,7 +141,7 @@ export default function Step4Preferences({
                   onClick={() => handleLocationTypeChange(option)}
                   className={
                     selected
-                      ? 'bg-m3-secondary-container text-m3-on-secondary-container rounded-m3-sm px-4 py-2 text-[var(--text-sm)] font-medium transition-colors'
+                      ? 'bg-m3-primary-container text-m3-on-primary-container rounded-m3-sm px-4 py-2 text-[var(--text-sm)] font-medium transition-colors'
                       : 'border border-m3-outline text-m3-on-surface-variant rounded-m3-sm px-4 py-2 text-[var(--text-sm)] hover:bg-m3-primary/8 transition-colors'
                   }
                 >
@@ -221,7 +158,7 @@ export default function Step4Preferences({
               <TextField
                 variant="outlined"
                 label="Location"
-                placeholder="e.g., Building A, Level 3 or 123 Main St"
+                placeholder="Building A, Level 3 or 123 Main St"
                 value={data.locationDetails}
                 maxLength={200}
                 onChange={e =>
@@ -240,8 +177,7 @@ export default function Step4Preferences({
           variant="outlined"
           className="p-4 md:p-5 flex flex-col gap-4 bg-m3-surface-container-lowest overflow-visible"
         >
-          <DatePickerField
-            id="application-deadline"
+          <DatePicker
             label="Application Deadline"
             value={data.applicationDeadline}
             min={todayISO()}
@@ -340,7 +276,7 @@ export default function Step4Preferences({
           <TextField
             variant="outlined"
             label="Additional Notes"
-            placeholder="e.g., Dress code, tools to bring, parking info..."
+            placeholder="Dress code, tools to bring, parking info..."
             multiline
             rows={3}
             value={data.additionalNotes}

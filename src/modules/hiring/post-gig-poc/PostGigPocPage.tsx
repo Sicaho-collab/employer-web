@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react"
-import M3Stepper from "@/components/ui/M3Stepper"
+import { M3Stepper } from '@sicaho-collab/ui-web'
 import PocStep1Task, { type PocGigData } from "./PocStep1Task"
 import PocStep2Schedule from "./PocStep2Schedule"
 import PocStep3Budget from "./PocStep3Budget"

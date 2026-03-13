@@ -53,7 +53,7 @@ export default function Step1Task({ data, patch, onNext }: Props) {
           <TextField
             variant="outlined"
             label="Gig Title"
-            placeholder="e.g., Campus Event Setup Assistant"
+            placeholder="Campus Event Setup Assistant"
             value={data.title}
             maxLength={100}
             onChange={e => patch({ title: e.target.value.slice(0, 100) })}
