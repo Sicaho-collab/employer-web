@@ -1,15 +1,14 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
-import { LogOut, LayoutDashboard, Briefcase, Wallet, Building2 } from 'lucide-react'
-import { NavigationRail, Card, Button } from '@sicaho-collab/ui-web'
+import { NavigationRail, Card, Button, Icon, Logo } from '@sicaho-collab/ui-web'
 import type { NavRailItem } from '@sicaho-collab/ui-web'
 
 // Top-level navigation — max 4 modules per IA spec
 const NAV_ITEMS: { to: string; label: string; icon: React.ReactNode }[] = [
-  { to: '/dashboard',    label: 'Dashboard',    icon: <LayoutDashboard className="size-6" /> },
-  { to: '/hiring',       label: 'Hiring',       icon: <Briefcase className="size-6" /> },
-  { to: '/finance',      label: 'Finance',      icon: <Wallet className="size-6" /> },
-  { to: '/organisation', label: 'Organisation', icon: <Building2 className="size-6" /> },
+  { to: '/dashboard',    label: 'Dashboard',    icon: <Icon name="dashboard" /> },
+  { to: '/hiring',       label: 'Hiring',       icon: <Icon name="work" /> },
+  { to: '/finance',      label: 'Finance',      icon: <Icon name="account_balance_wallet" /> },
+  { to: '/organisation', label: 'Organisation', icon: <Icon name="business" /> },
 ]
 
 const railItems: NavRailItem[] = NAV_ITEMS.map(({ label, icon }) => ({ label, icon }))
@@ -78,11 +77,7 @@ export default function AppLayout() {
       <div className="flex-1 flex flex-col min-h-0">
         {/* Top bar */}
         <header className="sticky top-0 z-40 h-[60px] flex items-center justify-between px-4 md:px-6" style={{ background: '#ECEEF1' }}>
-          <img
-            src={`${import.meta.env.BASE_URL}alumable-horizontal.png`}
-            alt="Alumable"
-            className="h-7"
-          />
+          <Logo variant="horizontal" size="md" basePath={import.meta.env.BASE_URL} />
           <div className="relative" ref={menuRef}>
             <button
               ref={triggerRef}
@@ -114,7 +109,7 @@ export default function AppLayout() {
                     onClick={handleSignOut}
                     className="w-full justify-start gap-2"
                   >
-                    <LogOut className="size-4" />
+                    <Icon name="logout" />
                     Sign Out
                   </Button>
                 </div>

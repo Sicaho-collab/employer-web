@@ -79,10 +79,10 @@ export default function Step2Timeline({ data, patch, onBack, onNext }: Props) {
     <>
       <div className="flex flex-col gap-6">
         <div>
-          <h2 className="text-[var(--text-xl)] font-bold text-m3-on-surface">
+          <h2 className="text-[22px] font-bold text-m3-on-surface">
             Great! When do you need this done?
           </h2>
-          <p className="text-[var(--text-sm)] text-m3-on-surface-variant mt-1">
+          <p className="text-sm text-m3-on-surface-variant mt-1">
             Pick your start and end dates on the calendar. Business days are counted automatically.
           </p>
         </div>
@@ -96,23 +96,24 @@ export default function Step2Timeline({ data, patch, onBack, onNext }: Props) {
             startDate={startDate}
             endDate={endDate}
             onChange={handleDateChange}
+            minDate={new Date()}
           />
 
           {/* Validation errors */}
           {(startError || endError) && (
             <div className="flex flex-col gap-1">
               {startError && (
-                <p className="text-[var(--text-xs)] text-m3-error" role="alert">{startError}</p>
+                <p className="text-xs text-m3-error" role="alert">{startError}</p>
               )}
               {endError && (
-                <p className="text-[var(--text-xs)] text-m3-error" role="alert">{endError}</p>
+                <p className="text-xs text-m3-error" role="alert">{endError}</p>
               )}
             </div>
           )}
 
           {businessDays !== null && (
             <div className="rounded-m3-sm bg-m3-primary-container/40 px-4 py-3">
-              <span className="text-[var(--text-sm)] font-medium text-m3-primary">
+              <span className="text-sm font-medium text-m3-primary">
                 Gig duration: {businessDays} business day{businessDays !== 1 ? 's' : ''}
               </span>
             </div>

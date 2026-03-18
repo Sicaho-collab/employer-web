@@ -103,7 +103,7 @@ const styles: Record<string, React.CSSProperties> = {
     padding: 'var(--space-6) var(--space-4)',
   },
   back: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     color: 'var(--color-text-secondary)',
     background: 'none',
     border: 'none',
@@ -138,17 +138,17 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 'var(--space-2)',
   },
   title: {
-    fontSize: 'var(--text-2xl)',
+    fontSize: 28,
     fontWeight: 800,
     color: 'var(--color-text-primary)',
     letterSpacing: '-0.03em',
   },
   description: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     color: 'var(--color-text-secondary)',
   },
   timeline: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     color: 'var(--color-text-muted)',
     marginTop: 'var(--space-1)',
   },
@@ -159,7 +159,7 @@ const styles: Record<string, React.CSSProperties> = {
     color: '#fff',
     border: 'none',
     borderRadius: 'var(--radius-md)',
-    fontSize: 'var(--text-base)',
+    fontSize: 16,
     fontWeight: 700,
     cursor: 'pointer',
     whiteSpace: 'nowrap',
@@ -173,7 +173,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   tab: {
     padding: 'var(--space-3) var(--space-4)',
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     fontWeight: 500,
     color: 'var(--color-text-secondary)',
     background: 'none',

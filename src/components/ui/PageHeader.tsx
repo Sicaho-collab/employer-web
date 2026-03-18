@@ -33,13 +33,13 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 'var(--space-1)',
   },
   title: {
-    fontSize: 'var(--text-xl)',
+    fontSize: 22,
     fontWeight: 700,
     color: 'var(--color-text-primary)',
     letterSpacing: '-0.02em',
   },
   subtitle: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     color: 'var(--color-text-secondary)',
   },
   actions: {

@@ -1,7 +1,6 @@
 // Detail view for "Check what needs attention" — full prioritized list with categories.
 import { useNavigate } from 'react-router-dom'
-import { AlertTriangle, ArrowLeft, CheckCircle2 } from 'lucide-react'
-import { Button, Badge } from '@sicaho-collab/ui-web'
+import { Button, Badge, Icon } from '@sicaho-collab/ui-web'
 import type { Gig } from '@/types/gig'
 import {
   GigStage,
@@ -111,10 +110,10 @@ export default function AttentionDetail() {
     <div className="max-w-[var(--content-max-w)] mx-auto px-4 md:px-6 py-6 md:py-8">
       <div className="flex items-center gap-3 mb-6">
         <Button variant="text" size="icon" onClick={() => navigate('/dashboard')} aria-label="Back to dashboard">
-          <ArrowLeft />
+          <Icon name="arrow_back" />
         </Button>
-        <AlertTriangle className="size-5 text-m3-primary" />
-        <h1 className="text-[var(--text-xl)] font-bold text-m3-on-surface flex-1">
+        <Icon name="warning" size={20} className="text-m3-primary" />
+        <h1 className="text-[22px] font-bold text-m3-on-surface flex-1">
           Needs your attention
         </h1>
         {totalCount > 0 && <Badge count={totalCount} />}
@@ -122,8 +121,8 @@ export default function AttentionDetail() {
 
       {categories.length === 0 ? (
         <div className="flex flex-col items-center py-12 gap-3">
-          <CheckCircle2 className="size-12 text-m3-primary" />
-          <p className="text-[var(--text-sm)] text-m3-on-surface-variant">
+          <Icon name="check_circle" size={48} className="text-m3-primary" />
+          <p className="text-sm text-m3-on-surface-variant">
             You're all caught up!
           </p>
         </div>
@@ -132,7 +131,7 @@ export default function AttentionDetail() {
           {categories.map((category) => (
             <section key={category.title}>
               <div className="flex items-center gap-2 mb-3">
-                <h2 className="text-[var(--text-base)] font-semibold text-m3-on-surface">
+                <h2 className="text-base font-semibold text-m3-on-surface">
                   {category.title}
                 </h2>
                 <Badge count={category.gigs.length} />
@@ -150,17 +149,17 @@ export default function AttentionDetail() {
                       }`}
                     >
                       <div className="flex-1 min-w-0">
-                        <p className="text-[var(--text-sm)] font-medium text-m3-on-surface truncate">
+                        <p className="text-sm font-medium text-m3-on-surface truncate">
                           {gig.title}
                         </p>
-                        <p className="text-[11px] text-m3-on-surface-variant mt-0.5">
+                        <p className="text-xs text-m3-on-surface-variant mt-0.5">
                           {getAttentionMessage(gig)}
                         </p>
                       </div>
                       <Button
                         variant="outlined"
                         size="sm"
-                        className="shrink-0 text-[var(--text-xs)] h-7 px-3"
+                        className="shrink-0 text-xs h-7 px-3"
                         onClick={() => navigate(`/hiring/${gig.id}`)}
                       >
                         {getGigCTA(gig)}

@@ -1,14 +1,13 @@
-import { Clock, AlertCircle, Zap, PlusCircle, Receipt } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { BentoCard, BentoGrid } from '@/components/ui/bento-grid'
-import { Button } from '@sicaho-collab/ui-web'
+import { Button, Icon } from '@sicaho-collab/ui-web'
 import { useAuth } from '@/modules/auth/AuthContext'
 import GreetingHeader from './components/GreetingHeader'
 
 const QUICK_ACTIONS = [
-  { label: 'Post a Gig',    icon: PlusCircle, route: '/hiring/new' },
-  { label: 'View Invoices', icon: Receipt,    route: '/finance/invoices' },
-] as const
+  { label: 'Post a Gig',    icon: 'add_circle',   route: '/hiring/new' },
+  { label: 'View Invoices', icon: 'receipt_long',  route: '/finance/invoices' },
+]
 
 export default function DashboardPage() {
   const navigate = useNavigate()
@@ -28,7 +27,7 @@ export default function DashboardPage() {
             className="col-span-1 bg-m3-surface rounded-[10px] h-full"
             iconClassName="text-[#FACC15]"
             titleClassName="text-m3-on-surface"
-            Icon={Clock}
+            icon={<Icon name="schedule" />}
             description="Pick up your most recent drafts, reviews, and in-progress agreements."
             href="/dashboard/recent"
             cta="View recent activity"
@@ -46,7 +45,7 @@ export default function DashboardPage() {
             className="col-span-1 bg-m3-surface rounded-[10px] h-full"
             iconClassName="text-m3-primary"
             titleClassName="text-m3-on-surface"
-            Icon={AlertCircle}
+            icon={<Icon name="error" />}
             description="Expiring gigs, pending applications, and overdue items that need action."
             href="/dashboard/attention"
             cta="Review items"
@@ -64,14 +63,14 @@ export default function DashboardPage() {
             className="col-span-1 bg-m3-surface rounded-[10px] h-full"
             iconClassName="text-[#3B82F6]"
             titleClassName="text-m3-on-surface"
-            Icon={Zap}
+            icon={<Icon name="auto_awesome" />}
             description="Common shortcuts to get things done fast."
             tag="Quick"
             tagClassName="border border-[#3B82F6] text-[#3B82F6] bg-[#3B82F6]/10"
             hoverClassName="group-hover:bg-[#3B82F6]/[.06]"
             ctaContent={
               <>
-                {QUICK_ACTIONS.map(({ label, icon: Icon, route }) => (
+                {QUICK_ACTIONS.map(({ label, icon, route }) => (
                   <Button
                     key={label}
                     variant="ghost"
@@ -79,7 +78,7 @@ export default function DashboardPage() {
                     className="pointer-events-auto gap-1.5"
                     onClick={() => navigate(route)}
                   >
-                    <Icon className="!size-4" />
+                    <Icon name={icon} size={16} />
                     {label}
                   </Button>
                 ))}

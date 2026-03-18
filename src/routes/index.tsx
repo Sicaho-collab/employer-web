@@ -24,9 +24,6 @@ import ActivityLogTab          from '@/modules/hiring/gig-detail/tabs/ActivityLo
 
 // Finance
 import FinancePage             from '@/modules/finance/FinancePage'
-import TransactionsView        from '@/modules/finance/TransactionsView'
-import InvoicesView            from '@/modules/finance/InvoicesView'
-import RefundsView             from '@/modules/finance/RefundsView'
 
 // Organisation
 import OrganisationPage        from '@/modules/organisation/OrganisationPage'
@@ -65,16 +62,7 @@ export const router = createBrowserRouter([
       },
 
       // ── Finance ──
-      {
-        path: 'finance',
-        element: <FinancePage />,
-        children: [
-          { index: true,          element: <Navigate to="transactions" replace /> },
-          { path: 'transactions', element: <TransactionsView /> },
-          { path: 'invoices',     element: <InvoicesView /> },
-          { path: 'refunds',      element: <RefundsView /> },
-        ],
-      },
+      { path: 'finance', element: <FinancePage /> },
 
       // ── Organisation ──
       { path: 'organisation', element: <OrganisationPage /> },

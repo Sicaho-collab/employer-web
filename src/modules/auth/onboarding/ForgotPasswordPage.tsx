@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Button, TextField } from '@sicaho-collab/ui-web'
-import { AlertCircle, Mail } from 'lucide-react'
+import { Card, Button, TextField, Icon } from '@sicaho-collab/ui-web'
 import { validateEmail } from './types'
 
 export default function ForgotPasswordPage() {
@@ -86,7 +85,7 @@ export default function ForgotPasswordPage() {
 
         <Card variant="outlined" className="p-4 md:p-8 flex flex-col items-center gap-4 bg-m3-surface-container-lowest mt-8">
           <div className="w-12 h-12 rounded-full bg-m3-primary-container flex items-center justify-center">
-            <Mail className="size-6 text-m3-on-primary-container" />
+            <Icon name="mail" className="text-m3-on-primary-container" />
           </div>
           <p className="text-sm text-m3-on-surface-variant text-center">
             We&apos;ve sent a password reset link to
@@ -133,7 +132,7 @@ export default function ForgotPasswordPage() {
           role="alert"
           className="bg-m3-error-container rounded-m3-sm p-4 mb-4 flex items-center gap-3"
         >
-          <AlertCircle className="size-5 text-m3-on-error-container shrink-0" />
+          <Icon name="error" size={20} className="text-m3-on-error-container shrink-0" />
           <span className="text-m3-on-error-container text-sm">{serverError}</span>
         </div>
       )}

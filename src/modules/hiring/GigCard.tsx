@@ -3,9 +3,8 @@ import type { Gig } from '@/types/gig'
 import { GigStage } from '@/types/gig'
 import StageBadge from '@/components/ui/StageBadge'
 import { getGigCTA, getGigAttentionInfo, getOfferDisplayConfig } from '@/utils/gigDisplay'
-import { Card, Button } from '@sicaho-collab/ui-web'
+import { Card, Button, Icon } from '@sicaho-collab/ui-web'
 import { cn } from '@/lib/utils'
-import { Calendar, Users, AlertTriangle } from 'lucide-react'
 
 interface GigCardProps {
   gig: Gig
@@ -39,7 +38,7 @@ export default function GigCard({ gig }: GigCardProps) {
         {/* ── Error banner ── */}
         {isError && (
           <div role="alert" className="flex items-center gap-2 mb-2 px-2 py-1.5 rounded-m3-xs bg-red-50 border border-red-200">
-            <AlertTriangle className="w-3.5 h-3.5 text-red-500 flex-shrink-0" />
+            <Icon name="warning" size={14} className="text-red-500 flex-shrink-0" />
             <span className="text-xs font-medium text-red-700">{attention.message}</span>
           </div>
         )}
@@ -69,20 +68,20 @@ export default function GigCard({ gig }: GigCardProps) {
           {offerConfig && (
             <span
               style={{ background: offerConfig.bg, color: offerConfig.color }}
-              className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold tracking-wide"
+              className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold tracking-wide"
             >
               {offerConfig.label}
             </span>
           )}
           {gig.start_date && (
             <div className="flex items-center gap-1.5 text-xs text-m3-on-surface-variant">
-              <Calendar className="w-3.5 h-3.5" />
+              <Icon name="calendar_today" size={14} />
               <span>{gig.start_date}{gig.end_date ? ` \u2192 ${gig.end_date}` : ''}</span>
             </div>
           )}
           {gig.stage === GigStage.POSTED && gig.is_published && (
             <div className="flex items-center gap-1.5 text-xs text-m3-on-surface-variant">
-              <Users className="w-3.5 h-3.5" />
+              <Icon name="groups" size={14} />
               <span>{gig.applicant_count} applicant{gig.applicant_count !== 1 ? 's' : ''}</span>
             </div>
           )}

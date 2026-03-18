@@ -1,7 +1,6 @@
 // Detail view for "Continue where I left off" — shows full recent activity list.
 import { useNavigate } from 'react-router-dom'
-import { Clock, ArrowLeft } from 'lucide-react'
-import { Button } from '@sicaho-collab/ui-web'
+import { Button, Icon } from '@sicaho-collab/ui-web'
 import StageBadge from '@/components/ui/StageBadge'
 import type { Gig } from '@/types/gig'
 import {
@@ -111,17 +110,17 @@ export default function RecentActivity() {
     <div className="max-w-[var(--content-max-w)] mx-auto px-4 md:px-6 py-6 md:py-8">
       <div className="flex items-center gap-3 mb-6">
         <Button variant="text" size="icon" onClick={() => navigate('/dashboard')} aria-label="Back to dashboard">
-          <ArrowLeft />
+          <Icon name="arrow_back" />
         </Button>
-        <Clock className="size-5 text-m3-primary" />
-        <h1 className="text-[var(--text-xl)] font-bold text-m3-on-surface">
+        <Icon name="schedule" size={20} className="text-m3-primary" />
+        <h1 className="text-[22px] font-bold text-m3-on-surface">
           Continue where I left off
         </h1>
       </div>
 
       {RECENT_GIGS.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-[var(--text-sm)] text-m3-on-surface-variant mb-4">
+          <p className="text-sm text-m3-on-surface-variant mb-4">
             No recent activity yet. Post your first gig to get started.
           </p>
           <Button variant="filled" onClick={() => navigate('/hiring/new')}>
@@ -138,16 +137,16 @@ export default function RecentActivity() {
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 mb-1">
-                  <p className="text-[var(--text-sm)] font-medium text-m3-on-surface truncate">
+                  <p className="text-sm font-medium text-m3-on-surface truncate">
                     {gig.title}
                   </p>
                   <StageBadge gig={gig} />
                 </div>
-                <p className="text-[11px] text-m3-on-surface-variant">
+                <p className="text-xs text-m3-on-surface-variant">
                   {getActivityLabel(gig)}
                 </p>
               </div>
-              <span className="text-[11px] text-m3-on-surface-variant whitespace-nowrap shrink-0">
+              <span className="text-xs text-m3-on-surface-variant whitespace-nowrap shrink-0">
                 {formatRelativeTime(gig.updated_at)}
               </span>
             </button>

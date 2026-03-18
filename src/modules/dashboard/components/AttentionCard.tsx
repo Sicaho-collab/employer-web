@@ -1,7 +1,5 @@
-import { AlertTriangle } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { Card, CardHeader, CardTitle, CardContent, CardFooter, Button, Badge } from '@sicaho-collab/ui-web'
-import { CheckCircle2 } from 'lucide-react'
+import { Card, CardHeader, CardTitle, CardContent, CardFooter, Button, Badge, Icon } from '@sicaho-collab/ui-web'
 import type { Gig } from '@/types/gig'
 import {
   GigStage,
@@ -59,7 +57,7 @@ export default function AttentionCard() {
   return (
     <Card variant="elevated" className="flex flex-col">
       <CardHeader className="flex flex-row items-center gap-2">
-        <AlertTriangle className="size-5 text-m3-primary shrink-0" />
+        <Icon name="warning" size={20} className="text-m3-primary shrink-0" />
         <CardTitle className="flex-1">Needs your attention</CardTitle>
         {hasItems && <Badge count={ATTENTION_GIGS.length} />}
       </CardHeader>
@@ -71,17 +69,17 @@ export default function AttentionCard() {
               <li key={gig.id}>
                 <div className="flex items-start justify-between gap-2 rounded-m3-sm p-2 -mx-2">
                   <div className="flex-1 min-w-0">
-                    <p className="text-[var(--text-sm)] font-medium text-m3-on-surface truncate">
+                    <p className="text-sm font-medium text-m3-on-surface truncate">
                       {gig.title}
                     </p>
-                    <p className="text-[11px] text-m3-on-surface-variant mt-0.5">
+                    <p className="text-xs text-m3-on-surface-variant mt-0.5">
                       {getAttentionMessage(gig)}
                     </p>
                   </div>
                   <Button
                     variant="outlined"
                     size="sm"
-                    className="shrink-0 text-[var(--text-xs)] h-7 px-3"
+                    className="shrink-0 text-xs h-7 px-3"
                     onClick={() => navigate(`/hiring/${gig.id}`)}
                   >
                     {getGigCTA(gig)}
@@ -92,8 +90,8 @@ export default function AttentionCard() {
           </ul>
         ) : (
           <div className="flex flex-col items-center py-4 gap-2">
-            <CheckCircle2 className="size-8 text-m3-primary" />
-            <p className="text-[var(--text-sm)] text-m3-on-surface-variant">
+            <Icon name="check_circle" size={32} className="text-m3-primary" />
+            <p className="text-sm text-m3-on-surface-variant">
               You're all caught up!
             </p>
           </div>

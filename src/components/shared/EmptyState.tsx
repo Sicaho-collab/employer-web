@@ -39,12 +39,12 @@ const styles: Record<string, React.CSSProperties> = {
     marginBottom: 'var(--space-2)',
   },
   title: {
-    fontSize: 'var(--text-md)',
+    fontSize: 16,
     fontWeight: 600,
     color: 'var(--color-text-primary)',
   },
   description: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     color: 'var(--color-text-secondary)',
     maxWidth: 320,
   },
@@ -55,7 +55,7 @@ const styles: Record<string, React.CSSProperties> = {
     color: '#fff',
     border: 'none',
     borderRadius: 'var(--radius-md)',
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     fontWeight: 600,
     cursor: 'pointer',
   },

@@ -17,7 +17,7 @@ const STATS: FinanceStat[] = [
 export default function FinancialSnapshot() {
   return (
     <section className="bg-m3-surface border border-m3-outline-variant rounded-m3-md p-5 shadow-m3-1">
-      <h2 className="text-[var(--text-base)] font-bold text-m3-on-surface mb-4">
+      <h2 className="text-base font-bold text-m3-on-surface mb-4">
         Financial Snapshot
       </h2>
       <div className="flex flex-col gap-3">
@@ -26,14 +26,14 @@ export default function FinancialSnapshot() {
             key={stat.label}
             className="flex flex-col gap-1 p-4 bg-m3-surface-container-low border border-m3-outline-variant rounded-m3-md"
           >
-            <p className="text-[var(--text-xl)] font-extrabold text-m3-on-surface tracking-tight">
+            <p className="text-[22px] font-extrabold text-m3-on-surface tracking-tight">
               {stat.value}
             </p>
-            <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface-variant">
+            <p className="text-sm font-semibold text-m3-on-surface-variant">
               {stat.label}
             </p>
             {stat.note && (
-              <p className="text-[11px] text-m3-on-surface-variant/70">
+              <p className="text-xs text-m3-on-surface-variant/70">
                 {stat.note}
               </p>
             )}

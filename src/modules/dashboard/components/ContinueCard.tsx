@@ -1,6 +1,5 @@
-import { Clock } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { Card, CardHeader, CardTitle, CardContent, CardFooter, Button } from '@sicaho-collab/ui-web'
+import { Card, CardHeader, CardTitle, CardContent, CardFooter, Button, Icon } from '@sicaho-collab/ui-web'
 import StageBadge from '@/components/ui/StageBadge'
 import type { Gig } from '@/types/gig'
 import {
@@ -73,7 +72,7 @@ export default function ContinueCard() {
   return (
     <Card variant="elevated" className="flex flex-col">
       <CardHeader className="flex flex-row items-center gap-2">
-        <Clock className="size-5 text-m3-primary shrink-0" />
+        <Icon name="schedule" size={20} className="text-m3-primary shrink-0" />
         <CardTitle>Continue where I left off</CardTitle>
       </CardHeader>
 
@@ -88,12 +87,12 @@ export default function ContinueCard() {
                   aria-label={`View ${gig.title}`}
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="text-[var(--text-sm)] font-medium text-m3-on-surface truncate">
+                    <p className="text-sm font-medium text-m3-on-surface truncate">
                       {gig.title.length > 40 ? `${gig.title.slice(0, 40)}...` : gig.title}
                     </p>
                     <div className="flex items-center gap-2 mt-1">
                       <StageBadge gig={gig} />
-                      <span className="text-[11px] text-m3-on-surface-variant">
+                      <span className="text-xs text-m3-on-surface-variant">
                         {formatRelativeTime(gig.updated_at)}
                       </span>
                     </div>
@@ -104,7 +103,7 @@ export default function ContinueCard() {
           </ul>
         ) : (
           <div className="text-center py-4">
-            <p className="text-[var(--text-sm)] text-m3-on-surface-variant mb-3">
+            <p className="text-sm text-m3-on-surface-variant mb-3">
               No recent activity yet. Post your first gig to get started.
             </p>
             <Button variant="filled" size="sm" onClick={() => navigate('/hiring/new')}>

@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Info, Calendar, DollarSign } from 'lucide-react'
-import { Button, Card } from '@sicaho-collab/ui-web'
+import { Button, Card, SimpleTooltip, Icon } from '@sicaho-collab/ui-web'
 import type { GigV3Data } from './PostGigV3Page'
 import { calculateFeeBreakdown, formatCurrency as fmtCur } from './fee-utils'
 
@@ -96,7 +95,7 @@ export default function Step5Review({ data, onBack }: Props) {
         {/* ── Left Column (2/3): Details + Preferences ── */}
         <div className="flex-1 lg:w-2/3 flex flex-col gap-6">
           {/* Details Summary */}
-          <SummaryCard title="Details" subtitle="This is what students will see on your gig listing">
+          <SummaryCard title="Details" subtitle="This is what students will see on your gig listing" icon={<Icon name="description" size={16} className="text-m3-primary" />}>
             <FieldRow label="Gig Title" value={data.title} />
             <FieldRow label="Description" value={data.description} />
             <div>
@@ -132,7 +131,7 @@ export default function Step5Review({ data, onBack }: Props) {
           </SummaryCard>
 
           {/* Approval Check */}
-          <SummaryCard title="Approval Check">
+          <SummaryCard title="Approval Check" icon={<Icon name="verified_user" size={16} className="text-m3-primary" />}>
             <FieldRow
               label="Approval"
               value={
@@ -152,45 +151,44 @@ export default function Step5Review({ data, onBack }: Props) {
         {/* ── Right Column (1/3): Timeline + Cost Breakdown ── */}
         <div className="lg:w-1/3 flex flex-col gap-6">
           {/* Timeline */}
-          <Card variant="outlined" className="p-5 md:p-6 bg-m3-surface-container-lowest">
+          <div className="p-5 md:p-6 rounded-m3-md" style={{ backgroundColor: '#D9EDF7' }}>
             <p className="text-base font-semibold text-m3-on-surface flex items-center gap-2">
-              <Calendar className="size-4 text-m3-primary" />
+              <Icon name="calendar_today" size={16} className="text-m3-on-surface" />
               Timeline
             </p>
-            <hr className="border-m3-outline-variant my-3" />
+            <hr className="border-black/10 my-3" />
             <div className="flex flex-col gap-3">
               <div>
-                <p className="text-sm text-m3-on-surface-variant">Gig Date</p>
-                <p className="text-base font-medium text-m3-on-primary-container">
+                <p className="text-sm text-m3-on-surface/70">Gig Date</p>
+                <p className="text-base font-medium text-m3-on-surface">
                   {formatDate(data.startDate)} – {formatDate(data.endDate)}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-m3-on-surface-variant">Application Deadline</p>
-                <p className="text-base font-medium text-m3-on-primary-container">{formatDate(data.applicationDeadline)}</p>
+                <p className="text-sm text-m3-on-surface/70">Application Deadline</p>
+                <p className="text-base font-medium text-m3-on-surface">{formatDate(data.applicationDeadline)}</p>
               </div>
             </div>
-          </Card>
+          </div>
 
           {/* Cost Breakdown */}
-          <Card variant="outlined" className="p-5 md:p-6 bg-m3-surface-container-lowest">
+          <div className="p-5 md:p-6 rounded-m3-md" style={{ backgroundColor: '#FBF0D6' }}>
             <p className="text-base font-semibold text-m3-on-surface flex items-center gap-2">
-              <DollarSign className="size-4 text-m3-primary" />
+              <Icon name="attach_money" size={16} className="text-m3-on-surface" />
               Cost Breakdown
             </p>
-            <hr className="border-m3-outline-variant my-3" />
+            <hr className="border-black/10 my-3" />
 
             {breakdown && (
               <div className="flex flex-col gap-2.5">
                 <div className="flex justify-between text-sm">
                   <span className="flex items-center text-m3-on-surface-variant">
                     Student payment
-                    <span className="group/tip relative inline-flex ml-1 cursor-help">
-                      <Info className="h-3.5 w-3.5 text-m3-on-surface-variant" />
-                      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/tip:block w-40 rounded-m3-xs bg-m3-inverse-surface text-m3-inverse-on-surface text-xs px-3 py-2 text-center z-20 shadow-m3-2">
-                        Incl. super
+                    <SimpleTooltip text="Incl. super" delay={false}>
+                      <span className="inline-flex ml-1 cursor-help">
+                        <Icon name="info" size={14} className="text-m3-on-surface-variant" />
                       </span>
-                    </span>
+                    </SimpleTooltip>
                   </span>
                   <span className="text-m3-on-surface font-medium">{formatBudgetCurrency(data.budget)}</span>
                 </div>
@@ -205,30 +203,29 @@ export default function Step5Review({ data, onBack }: Props) {
                 <div className="flex justify-between text-sm">
                   <span className="flex items-center text-m3-on-surface-variant">
                     GST (10%)
-                    <span className="group/tip relative inline-flex ml-1 cursor-help">
-                      <Info className="h-3.5 w-3.5 text-m3-on-surface-variant" />
-                      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/tip:block w-48 rounded-m3-xs bg-m3-inverse-surface text-m3-inverse-on-surface text-xs px-3 py-2 text-center z-20 shadow-m3-2">
-                        GST on Service Fee + Processing fee
+                    <SimpleTooltip text="GST on Service Fee + Processing fee" delay={false}>
+                      <span className="inline-flex ml-1 cursor-help">
+                        <Icon name="info" size={14} className="text-m3-on-surface-variant" />
                       </span>
-                    </span>
+                    </SimpleTooltip>
                   </span>
                   <span className="text-m3-on-surface font-medium">{fmtCur(breakdown.gst)}</span>
                 </div>
 
-                <hr className="border-m3-outline-variant my-1" />
+                <hr className="border-black/10 my-1" />
 
                 {/* Total — emphasized */}
-                <div className="flex justify-between items-center rounded-m3-xs bg-m3-primary-container px-3 py-2.5 -mx-1">
-                  <span className="text-sm font-semibold text-m3-on-primary-container">
+                <div className="flex justify-between items-center rounded-m3-xs bg-white/40 px-3 py-2.5 -mx-1">
+                  <span className="text-sm font-semibold text-m3-on-surface">
                     Total Gig Cost
                   </span>
-                  <span className="text-base font-bold text-m3-on-primary-container">
+                  <span className="text-base font-bold text-m3-on-surface">
                     {fmtCur(breakdown.total)}
                   </span>
                 </div>
               </div>
             )}
-          </Card>
+          </div>
         </div>
       </div>
 
@@ -258,18 +255,23 @@ export default function Step5Review({ data, onBack }: Props) {
 function SummaryCard({
   title,
   subtitle,
+  icon,
   children,
 }: {
   title: string
   subtitle?: string
+  icon?: React.ReactNode
   children: React.ReactNode
 }) {
   return (
     <Card
       variant="outlined"
-      className="p-5 md:p-6 bg-m3-surface-container-lowest"
+      className="p-5 md:p-6 bg-m3-surface-container-lowest overflow-hidden"
     >
-      <p className="text-base font-semibold text-m3-on-surface">{title}</p>
+      <p className="text-base font-semibold text-m3-on-surface flex items-center gap-2">
+        {icon}
+        {title}
+      </p>
       {subtitle && (
         <p className="text-xs text-m3-on-surface-variant mt-0.5">{subtitle}</p>
       )}
@@ -281,19 +283,18 @@ function SummaryCard({
 
 function FieldRow({ label, value, hint }: { label: string; value: string; hint?: string }) {
   return (
-    <div>
+    <div className="min-w-0">
       <p className="text-sm text-m3-on-surface-variant flex items-center gap-1">
         {label}
         {hint && (
-          <span className="group/tip relative inline-flex cursor-help">
-            <Info className="h-3.5 w-3.5 text-m3-on-surface-variant" />
-            <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/tip:block w-40 rounded-m3-xs bg-m3-inverse-surface text-m3-inverse-on-surface text-[var(--text-xs)] px-3 py-2 text-center z-20 shadow-m3-2">
-              {hint}
+          <SimpleTooltip text={hint} delay={false}>
+            <span className="inline-flex cursor-help">
+              <Icon name="info" size={14} className="text-m3-on-surface-variant" />
             </span>
-          </span>
+          </SimpleTooltip>
         )}
       </p>
-      <p className="text-base text-m3-on-surface">{value}</p>
+      <p className="text-base text-m3-on-surface break-words">{value}</p>
     </div>
   )
 }

@@ -1,5 +1,8 @@
 // Applications Tab — list of applicants with review/shortlist/select actions.
 
+import { DataTable, Tag, Button } from '@sicaho-collab/ui-web'
+import type { Column } from '@sicaho-collab/ui-web'
+
 interface Applicant {
   id: string
   name: string
@@ -9,11 +12,11 @@ interface Applicant {
   status: 'PENDING' | 'SHORTLISTED' | 'SELECTED' | 'REJECTED'
 }
 
-const STATUS_STYLE: Record<Applicant['status'], React.CSSProperties> = {
-  PENDING:     { color: '#92400E', background: '#FEF3C7' },
-  SHORTLISTED: { color: '#1E40AF', background: '#DBEAFE' },
-  SELECTED:    { color: '#065F46', background: '#D1FAE5' },
-  REJECTED:    { color: '#7F1D1D', background: '#FEE2E2' },
+const STATUS_TAG_CLASS: Record<Applicant['status'], string> = {
+  PENDING:     'bg-amber-100 text-amber-800',
+  SHORTLISTED: 'bg-blue-100 text-blue-800',
+  SELECTED:    'bg-emerald-100 text-emerald-800',
+  REJECTED:    'bg-red-100 text-red-800',
 }
 
 // Placeholder data — replace with fetch
@@ -24,6 +27,62 @@ const APPLICANTS: Applicant[] = [
   { id: 'a4', name: 'Sara Ng',      course: 'BA Design',            university: 'LASALLE', appliedAt: '2025-01-19', status: 'REJECTED'    },
 ]
 
+const columns: Column<Applicant>[] = [
+  {
+    key: 'name',
+    header: 'Name',
+    width: 160,
+    minWidth: 120,
+  },
+  {
+    key: 'course',
+    header: 'Course',
+    width: 200,
+    minWidth: 140,
+  },
+  {
+    key: 'university',
+    header: 'University',
+    width: 140,
+    minWidth: 100,
+  },
+  {
+    key: 'appliedAt',
+    header: 'Applied',
+    sortable: true,
+    width: 120,
+    minWidth: 90,
+    cell: (row) => <span className="text-m3-on-surface-variant">{row.appliedAt}</span>,
+  },
+  {
+    key: 'status',
+    header: 'Status',
+    sortable: true,
+    width: 120,
+    minWidth: 90,
+    cell: (row) => (
+      <Tag size="sm" className={STATUS_TAG_CLASS[row.status]}>
+        {row.status}
+      </Tag>
+    ),
+  },
+  {
+    key: 'actions',
+    header: '',
+    width: 120,
+    minWidth: 100,
+    cell: () => (
+      <Button
+        variant="outlined"
+        size="sm"
+        className="hover:bg-m3-primary/8 hover:text-m3-primary hover:ring-1 hover:ring-inset hover:ring-m3-primary/30"
+      >
+        View Profile
+      </Button>
+    ),
+  },
+]
+
 export default function ApplicationsTab() {
   return (
     <div style={styles.container}>
@@ -32,35 +91,12 @@ export default function ApplicationsTab() {
         <span style={styles.count}>{APPLICANTS.length} total</span>
       </div>
 
-      <div style={{ overflowX: 'auto' }}>
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            {['Name', 'Course', 'University', 'Applied', 'Status', 'Action'].map(h => (
-              <th key={h} style={styles.th}>{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {APPLICANTS.map((a) => (
-            <tr key={a.id} style={styles.tr}>
-              <td style={{ ...styles.td, fontWeight: 600 }}>{a.name}</td>
-              <td style={styles.td}>{a.course}</td>
-              <td style={styles.td}>{a.university}</td>
-              <td style={{ ...styles.td, color: 'var(--color-text-muted)' }}>{a.appliedAt}</td>
-              <td style={styles.td}>
-                <span style={{ ...styles.statusBadge, ...STATUS_STYLE[a.status] }}>
-                  {a.status}
-                </span>
-              </td>
-              <td style={styles.td}>
-                <button style={styles.actionBtn}>View Profile</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      </div>
+      <DataTable<Applicant>
+        columns={columns}
+        data={APPLICANTS}
+        searchPlaceholder="Search applicants..."
+        emptyState="No applicants yet"
+      />
     </div>
   )
 }
@@ -69,56 +105,15 @@ const styles: Record<string, React.CSSProperties> = {
   container: { display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' },
   titleRow:  { display: 'flex', alignItems: 'center', gap: 'var(--space-3)' },
   heading: {
-    fontSize: 'var(--text-base)',
+    fontSize: 16,
     fontWeight: 700,
     color: 'var(--color-text-primary)',
   },
   count: {
-    fontSize: 'var(--text-xs)',
+    fontSize: 12,
     color: 'var(--color-text-muted)',
     background: 'var(--color-border)',
     padding: '2px 8px',
     borderRadius: 100,
-  },
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-  },
-  th: {
-    fontSize: 'var(--text-xs)',
-    fontWeight: 700,
-    color: 'var(--color-text-secondary)',
-    textTransform: 'uppercase',
-    letterSpacing: '0.05em',
-    padding: 'var(--space-2) var(--space-3)',
-    textAlign: 'left',
-    borderBottom: '1px solid var(--color-border)',
-    background: 'var(--color-bg)',
-  },
-  tr: {
-    borderBottom: '1px solid var(--color-border)',
-  },
-  td: {
-    padding: 'var(--space-3)',
-    fontSize: 'var(--text-sm)',
-    color: 'var(--color-text-primary)',
-    verticalAlign: 'middle',
-  },
-  statusBadge: {
-    display: 'inline-block',
-    padding: '2px 8px',
-    borderRadius: 100,
-    fontSize: 'var(--text-xs)',
-    fontWeight: 600,
-  },
-  actionBtn: {
-    padding: '4px 10px',
-    fontSize: 'var(--text-xs)',
-    fontWeight: 600,
-    border: '1px solid var(--color-border)',
-    borderRadius: 'var(--radius-sm)',
-    background: 'var(--color-surface)',
-    cursor: 'pointer',
-    color: 'var(--color-text-secondary)',
   },
 }

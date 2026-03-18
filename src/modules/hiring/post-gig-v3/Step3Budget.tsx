@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react'
 import NumberFlow from '@number-flow/react'
-import { Info } from 'lucide-react'
-import { Button } from '@sicaho-collab/ui-web'
+import { Button, SimpleTooltip, Icon } from '@sicaho-collab/ui-web'
 import type { GigV3Data } from './PostGigV3Page'
 import { calculateFeeBreakdown, isValidBudgetInput, MAX_BUDGET } from './fee-utils'
 
@@ -14,12 +13,11 @@ interface Props {
 
 function Tooltip({ text }: { text: string }) {
   return (
-    <span className="group/tip relative inline-flex ml-1 cursor-help">
-      <Info className="h-4 w-4 text-m3-on-surface-variant" />
-      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/tip:block w-56 rounded-m3-xs bg-m3-inverse-surface text-m3-inverse-on-surface text-[var(--text-xs)] px-3 py-2 text-center z-20 shadow-m3-2">
-        {text}
+    <SimpleTooltip text={text} delay={false}>
+      <span className="inline-flex ml-1 cursor-help">
+        <Icon name="info" size={16} className="text-m3-on-surface-variant" />
       </span>
-    </span>
+    </SimpleTooltip>
   )
 }
 
@@ -75,10 +73,10 @@ export default function Step3Budget({ data, patch, onBack, onNext }: Props) {
       <div className="flex flex-col items-center gap-8 py-4">
         {/* Header */}
         <div className="text-center">
-          <h2 className="text-[var(--text-xl)] font-bold text-m3-on-surface">
+          <h2 className="text-[22px] font-bold text-m3-on-surface">
             What's your budget?
           </h2>
-          <p className="text-[var(--text-sm)] text-m3-on-surface-variant mt-1">
+          <p className="text-sm text-m3-on-surface-variant mt-1">
             Enter the student payment and we'll calculate the rest
           </p>
         </div>
@@ -99,19 +97,19 @@ export default function Step3Budget({ data, patch, onBack, onNext }: Props) {
             />
           </div>
           {budgetError && (
-            <p role="alert" className="text-[var(--text-xs)] text-m3-error mt-1">{budgetError}</p>
+            <p role="alert" className="text-xs text-m3-error mt-1">{budgetError}</p>
           )}
         </div>
 
         {/* Breakdown — filled surface, no outline */}
         {breakdown && (
           <div className="w-full max-w-md rounded-m3-md bg-m3-secondary-container p-5 flex flex-col gap-3">
-            <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface text-center">
+            <p className="text-sm font-semibold text-m3-on-surface text-center">
               Cost Breakdown
             </p>
 
             <div className="flex flex-col gap-2">
-              <div className="flex justify-between text-[var(--text-sm)]">
+              <div className="flex justify-between text-sm">
                 <span className="flex items-center text-m3-on-surface-variant">
                   Student payment
                   <Tooltip text="This amount includes superannuation" />
@@ -120,19 +118,19 @@ export default function Step3Budget({ data, patch, onBack, onNext }: Props) {
                   <NumberFlow value={breakdown.studentPayment} format={{ style: 'currency', currency: 'AUD', minimumFractionDigits: 2, useGrouping: true }} />
                 </span>
               </div>
-              <div className="flex justify-between text-[var(--text-sm)]">
+              <div className="flex justify-between text-sm">
                 <span className="text-m3-on-surface-variant">Alumable Service Fee (12%)</span>
                 <span className="text-m3-on-surface font-medium">
                   <NumberFlow value={breakdown.serviceFee} format={{ style: 'currency', currency: 'AUD', minimumFractionDigits: 2, useGrouping: true }} />
                 </span>
               </div>
-              <div className="flex justify-between text-[var(--text-sm)]">
+              <div className="flex justify-between text-sm">
                 <span className="text-m3-on-surface-variant">Processing fee (1.7%)</span>
                 <span className="text-m3-on-surface font-medium">
                   <NumberFlow value={breakdown.processingFee} format={{ style: 'currency', currency: 'AUD', minimumFractionDigits: 2, useGrouping: true }} />
                 </span>
               </div>
-              <div className="flex justify-between items-center text-[var(--text-sm)]">
+              <div className="flex justify-between items-center text-sm">
                 <span className="flex items-center text-m3-on-surface-variant">
                   GST (10%)
                   <Tooltip text="GST is charged on the combined Alumable Service Fee and Processing fee" />
@@ -144,7 +142,7 @@ export default function Step3Budget({ data, patch, onBack, onNext }: Props) {
 
               <hr className="border-m3-outline-variant my-1" />
 
-              <div className="flex justify-between text-[var(--text-base)]">
+              <div className="flex justify-between text-base">
                 <span className="font-semibold text-m3-on-surface">Total Gig Cost</span>
                 <span className="font-bold text-m3-on-surface">
                   <NumberFlow

@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Card, Button, Chip, Checkbox, TextField } from '@sicaho-collab/ui-web'
-import { Eye, EyeOff, AlertCircle, Check } from 'lucide-react'
+import { Card, Button, Chip, Checkbox, TextField, Icon } from '@sicaho-collab/ui-web'
 import {
   validateEmail,
   validatePassword,
@@ -106,7 +105,7 @@ export default function SignUpPage() {
 
         <Card variant="outlined" className="p-4 md:p-8 flex flex-col items-center gap-4 bg-m3-surface-container-lowest">
           <div className="w-12 h-12 rounded-full bg-m3-primary-container flex items-center justify-center">
-            <Check className="size-6 text-m3-on-primary-container" />
+            <Icon name="check" className="text-m3-on-primary-container" />
           </div>
           <h2 className="text-lg font-semibold text-m3-on-surface">Account Created</h2>
           <p className="text-sm text-m3-on-surface-variant text-center">
@@ -141,7 +140,7 @@ export default function SignUpPage() {
           role="alert"
           className="bg-m3-error-container rounded-m3-sm p-4 mb-4 flex items-center gap-3"
         >
-          <AlertCircle className="size-5 text-m3-on-error-container shrink-0" />
+          <Icon name="error" size={20} className="text-m3-on-error-container shrink-0" />
           <span className="text-m3-on-error-container text-sm">{serverError}</span>
         </div>
       )}
@@ -196,7 +195,7 @@ export default function SignUpPage() {
                   tabIndex={-1}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  {showPassword ? <EyeOff /> : <Eye />}
+                  <Icon name={showPassword ? "visibility_off" : "visibility"} />
                 </button>
               }
             />
@@ -232,7 +231,7 @@ export default function SignUpPage() {
                 tabIndex={-1}
                 aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
               >
-                {showConfirmPassword ? <EyeOff /> : <Eye />}
+                <Icon name={showConfirmPassword ? "visibility_off" : "visibility"} />
               </button>
             }
           />

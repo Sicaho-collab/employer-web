@@ -48,7 +48,7 @@ const styles: Record<string, React.CSSProperties> = {
   container: { display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' },
   section:   { display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' },
   heading: {
-    fontSize: 'var(--text-base)',
+    fontSize: 16,
     fontWeight: 700,
     color: 'var(--color-text-primary)',
     paddingBottom: 'var(--space-2)',
@@ -61,12 +61,12 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: 'baseline',
   },
   dt: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     fontWeight: 600,
     color: 'var(--color-text-secondary)',
   },
   dd: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     color: 'var(--color-text-primary)',
   },
   list: {
@@ -74,7 +74,7 @@ const styles: Record<string, React.CSSProperties> = {
     display: 'flex',
     flexDirection: 'column',
     gap: 'var(--space-2)',
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     color: 'var(--color-text-primary)',
   },
 }

@@ -25,7 +25,7 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 5,
     padding: '2px 8px',
     borderRadius: 100,
-    fontSize: 'var(--text-xs)',
+    fontSize: 12,
     fontWeight: 600,
     letterSpacing: '0.03em',
     textTransform: 'uppercase',

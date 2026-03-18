@@ -110,10 +110,10 @@ export default function Step4Preferences({
     <>
       <div className="flex flex-col gap-6">
         <div>
-          <h2 className="text-[var(--text-xl)] font-bold text-m3-on-surface">
+          <h2 className="text-[22px] font-bold text-m3-on-surface">
             Just a few more details!
           </h2>
-          <p className="text-[var(--text-sm)] text-m3-on-surface-variant mt-1">
+          <p className="text-sm text-m3-on-surface-variant mt-1">
             I've pre-filled a few details based on what you shared. Have a look and tweak anything that doesn't look quite right.
           </p>
         </div>
@@ -124,10 +124,10 @@ export default function Step4Preferences({
           className="p-4 md:p-5 flex flex-col gap-4 bg-m3-surface-container-lowest"
         >
           <div>
-            <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface">
+            <p className="text-sm font-semibold text-m3-on-surface">
               Gig Type
             </p>
-            <p className="text-[var(--text-xs)] text-m3-on-surface-variant mt-1">
+            <p className="text-xs text-m3-on-surface-variant mt-1">
               Where will the gig happen?
             </p>
           </div>
@@ -141,8 +141,8 @@ export default function Step4Preferences({
                   onClick={() => handleLocationTypeChange(option)}
                   className={
                     selected
-                      ? 'bg-m3-primary-container text-m3-on-primary-container rounded-m3-sm px-4 py-2 text-[var(--text-sm)] font-medium transition-colors'
-                      : 'border border-m3-outline text-m3-on-surface-variant rounded-m3-sm px-4 py-2 text-[var(--text-sm)] hover:bg-m3-primary/8 transition-colors'
+                      ? 'bg-m3-primary-container text-m3-on-primary-container rounded-m3-sm px-4 py-2 text-sm font-medium transition-colors'
+                      : 'border border-m3-outline text-m3-on-surface-variant rounded-m3-sm px-4 py-2 text-sm hover:bg-m3-primary/8 transition-colors'
                   }
                 >
                   {LOCATION_LABELS[option]}
@@ -152,7 +152,7 @@ export default function Step4Preferences({
           </div>
           {needsLocationDetails && (
             <div>
-              <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface mb-3">
+              <p className="text-sm font-semibold text-m3-on-surface mb-3">
                 Where will the student need to be?
               </p>
               <TextField
@@ -195,10 +195,10 @@ export default function Step4Preferences({
           className="p-4 md:p-5 flex flex-col gap-4 bg-m3-surface-container-lowest"
         >
           <div>
-            <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface">
+            <p className="text-sm font-semibold text-m3-on-surface">
               Approval Check
             </p>
-            <p className="text-[var(--text-xs)] text-m3-on-surface-variant mt-1">
+            <p className="text-xs text-m3-on-surface-variant mt-1">
               To ensure you've received the necessary approvals before publishing this gig, we require you to notify a manager/team member regarding your post.
             </p>
           </div>
@@ -214,7 +214,7 @@ export default function Step4Preferences({
                 }
               }}
             />
-            <span className="text-[var(--text-sm)] text-m3-on-surface">
+            <span className="text-sm text-m3-on-surface">
               I am the owner and have authority to publish this gig
             </span>
           </label>
@@ -266,10 +266,10 @@ export default function Step4Preferences({
           className="p-4 md:p-5 flex flex-col gap-4 bg-m3-surface-container-lowest"
         >
           <div>
-            <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface">
+            <p className="text-sm font-semibold text-m3-on-surface">
               Notes
             </p>
-            <p className="text-[var(--text-xs)] text-m3-on-surface-variant mt-1">
+            <p className="text-xs text-m3-on-surface-variant mt-1">
               Is there anything else you would like to include for the students?
             </p>
           </div>

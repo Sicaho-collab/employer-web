@@ -75,7 +75,7 @@ export default function Step1Details({ data, patch, onNext }: Props) {
           variant="outlined"
           className="p-4 md:p-5 flex flex-col gap-4 bg-m3-surface-container-lowest"
         >
-          <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface">
+          <p className="text-sm font-semibold text-m3-on-surface">
             Gig Information
           </p>
           <div>
@@ -91,7 +91,7 @@ export default function Step1Details({ data, patch, onNext }: Props) {
               errorText={titleError}
             />
             <p
-              className={`text-[var(--text-xs)] mt-1 px-4 ${
+              className={`text-xs mt-1 px-4 ${
                 titleLen >= 100
                   ? 'text-m3-error'
                   : 'text-m3-on-surface-variant'
@@ -117,7 +117,7 @@ export default function Step1Details({ data, patch, onNext }: Props) {
               errorText={descError}
             />
             <p
-              className={`text-[var(--text-xs)] mt-1 px-4 ${
+              className={`text-xs mt-1 px-4 ${
                 descLen >= 1000
                   ? 'text-m3-error'
                   : 'text-m3-on-surface-variant'
@@ -133,10 +133,10 @@ export default function Step1Details({ data, patch, onNext }: Props) {
           className="p-4 md:p-5 flex flex-col gap-4 bg-m3-surface-container-lowest"
         >
           <div>
-            <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface">
+            <p className="text-sm font-semibold text-m3-on-surface">
               Capabilities
             </p>
-            <p className="text-[var(--text-xs)] text-m3-on-surface-variant mt-1">
+            <p className="text-xs text-m3-on-surface-variant mt-1">
               Select up to {MAX_CAPABILITIES} capabilities required for this gig
             </p>
           </div>
@@ -158,7 +158,7 @@ export default function Step1Details({ data, patch, onNext }: Props) {
             })}
           </div>
           {capError && (
-            <p className="text-[var(--text-xs)] text-m3-error" role="alert">{capError}</p>
+            <p className="text-xs text-m3-error" role="alert">{capError}</p>
           )}
         </Card>
       </div>

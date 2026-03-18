@@ -68,7 +68,7 @@ export default function NeedsAttention() {
 
   return (
     <section className="bg-m3-surface border border-m3-outline-variant rounded-m3-md p-5 shadow-m3-1">
-      <h2 className="text-[var(--text-base)] font-bold text-m3-on-surface mb-4">
+      <h2 className="text-base font-bold text-m3-on-surface mb-4">
         Needs Attention
       </h2>
       <div className="flex flex-col gap-1">
@@ -86,16 +86,16 @@ export default function NeedsAttention() {
               <div className="flex items-center gap-3 flex-1 min-w-0">
                 <StageBadge gig={gig} />
                 <div>
-                  <p className="text-[var(--text-sm)] font-semibold text-m3-on-surface">
+                  <p className="text-sm font-semibold text-m3-on-surface">
                     {gig.title}
                   </p>
-                  <p className="text-[11px] text-m3-on-surface-variant mt-px">
+                  <p className="text-xs text-m3-on-surface-variant mt-px">
                     {getAttentionMessage(gig)}
                   </p>
                 </div>
               </div>
               <button
-                className={`px-3 py-2 border-none rounded-m3-sm text-[11px] font-semibold cursor-pointer whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-m3-primary ${
+                className={`px-3 py-2 border-none rounded-m3-sm text-xs font-semibold cursor-pointer whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-m3-primary ${
                   hasError
                     ? 'bg-m3-error/10 text-m3-on-error-container'
                     : 'bg-m3-primary/8 text-m3-primary'

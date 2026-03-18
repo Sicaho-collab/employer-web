@@ -61,7 +61,7 @@ function Row({ label, value }: { label: string; value: string }) {
 const styles: Record<string, React.CSSProperties> = {
   container: { display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' },
   heading: {
-    fontSize: 'var(--text-base)',
+    fontSize: 16,
     fontWeight: 700,
     color: 'var(--color-text-primary)',
     paddingBottom: 'var(--space-3)',
@@ -69,7 +69,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   section: { display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' },
   subheading: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     fontWeight: 700,
     color: 'var(--color-text-secondary)',
     textTransform: 'uppercase',
@@ -92,7 +92,7 @@ const styles: Record<string, React.CSSProperties> = {
     borderRadius: '50%',
   },
   stepLabel: {
-    fontSize: 'var(--text-xs)',
+    fontSize: 12,
     fontWeight: 500,
     whiteSpace: 'nowrap',
   },
@@ -109,12 +109,12 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: 'baseline',
   },
   dt: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     fontWeight: 600,
     color: 'var(--color-text-secondary)',
   },
   dd: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     color: 'var(--color-text-primary)',
   },
   actions: {
@@ -128,7 +128,7 @@ const styles: Record<string, React.CSSProperties> = {
     color: '#fff',
     border: 'none',
     borderRadius: 'var(--radius-md)',
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     fontWeight: 600,
     cursor: 'pointer',
   },
@@ -138,7 +138,7 @@ const styles: Record<string, React.CSSProperties> = {
     color: 'var(--color-text-secondary)',
     border: '1px solid var(--color-border)',
     borderRadius: 'var(--radius-md)',
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     fontWeight: 600,
     cursor: 'pointer',
   },

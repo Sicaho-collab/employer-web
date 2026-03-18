@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
-import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@sicaho-collab/ui-web";
+import { Button, Icon } from "@sicaho-collab/ui-web";
 
 const BentoGrid = ({
   children,
@@ -26,7 +25,7 @@ const BentoCard = ({
   name,
   className,
   background,
-  Icon,
+  icon,
   iconClassName,
   titleClassName,
   description,
@@ -41,7 +40,7 @@ const BentoCard = ({
   name: string;
   className: string;
   background?: ReactNode;
-  Icon: any;
+  icon: ReactNode;
   iconClassName?: string;
   titleClassName?: string;
   description: string;
@@ -66,7 +65,7 @@ const BentoCard = ({
     {background && <div className="absolute inset-0">{background}</div>}
     {tag && (
       <span className={cn(
-        "absolute top-3 right-3 z-10 rounded-m3-full px-2.5 py-0.5 text-[var(--text-xs)] font-medium",
+        "absolute top-3 right-3 z-10 rounded-m3-full px-2.5 py-0.5 text-xs font-medium",
         tagClassName || "bg-m3-surface-container-high text-m3-on-surface-variant"
       )}>
         {tag}
@@ -74,12 +73,12 @@ const BentoCard = ({
     )}
     <div className="pointer-events-none z-10 flex flex-col gap-2 p-6">
       <div className="flex items-center gap-3">
-        <Icon className={cn("h-6 w-6 shrink-0 text-m3-on-surface", iconClassName)} />
-        <h3 className={cn("text-[var(--text-lg)] font-semibold text-m3-on-surface", titleClassName)}>
+        <div className={cn("h-6 w-6 shrink-0 text-m3-on-surface flex items-center justify-center", iconClassName)}>{icon}</div>
+        <h3 className={cn("text-lg font-semibold text-m3-on-surface", titleClassName)}>
           {name}
         </h3>
       </div>
-      <p className="max-w-lg text-[var(--text-sm)] text-m3-on-surface-variant">{description}</p>
+      <p className="max-w-lg text-sm text-m3-on-surface-variant">{description}</p>
     </div>
     {children && <div className="z-10">{children}</div>}
     {ctaContent ? (
@@ -91,7 +90,7 @@ const BentoCard = ({
         <Button variant="ghost" asChild size="sm" className="pointer-events-auto">
           <a href={href}>
             {cta}
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <Icon name="arrow_forward" size={16} />
           </a>
         </Button>
       </div>

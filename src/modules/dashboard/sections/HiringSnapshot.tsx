@@ -23,7 +23,7 @@ export default function HiringSnapshot() {
 
   return (
     <section className="bg-m3-surface border border-m3-outline-variant rounded-m3-md p-5 shadow-m3-1">
-      <h2 className="text-[var(--text-base)] font-bold text-m3-on-surface mb-4">
+      <h2 className="text-base font-bold text-m3-on-surface mb-4">
         Hiring Pipeline
       </h2>
       <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
@@ -41,7 +41,7 @@ export default function HiringSnapshot() {
             <span className="text-[28px] font-extrabold text-m3-on-surface tracking-tight leading-none">
               {count}
             </span>
-            <span className="text-[11px] font-medium text-m3-on-surface-variant uppercase tracking-wider">
+            <span className="text-xs font-medium text-m3-on-surface-variant uppercase tracking-wider">
               {label}
             </span>
           </button>

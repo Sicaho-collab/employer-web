@@ -1,3 +1,4 @@
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@sicaho-collab/ui-web'
 import PageHeader from '@/components/ui/PageHeader'
 import type { Organisation, TeamMember } from '@/types/gig'
 
@@ -15,10 +16,10 @@ const TEAM: TeamMember[] = [
   { id: 'u3', org_id: 'org1', name: 'Mei Lin',     email: 'mei@acme.com',      role: 'FINANCE',         joined_at: '2024-09-01T00:00:00Z' },
 ]
 
-const ROLE_STYLE: Record<TeamMember['role'], React.CSSProperties> = {
-  ADMIN:          { color: '#4C1D95', background: '#EDE9FE' },
-  HIRING_MANAGER: { color: '#1E40AF', background: '#DBEAFE' },
-  FINANCE:        { color: '#065F46', background: '#D1FAE5' },
+const ROLE_BADGE_CLASS: Record<TeamMember['role'], string> = {
+  ADMIN:          'bg-violet-50 text-violet-700',
+  HIRING_MANAGER: 'bg-blue-50 text-blue-700',
+  FINANCE:        'bg-emerald-50 text-emerald-700',
 }
 
 export default function OrganisationPage() {
@@ -48,33 +49,32 @@ export default function OrganisationPage() {
             <button style={styles.inviteBtn}>+ Invite Member</button>
           </div>
 
-          <div style={{ overflowX: 'auto' }}>
-          <table style={styles.table}>
-            <thead>
-              <tr>
-                {['Name', 'Email', 'Role', 'Joined'].map(h => (
-                  <th key={h} style={styles.th}>{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Joined</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {TEAM.map((member) => (
-                <tr key={member.id} style={styles.tr}>
-                  <td style={{ ...styles.td, fontWeight: 600 }}>{member.name}</td>
-                  <td style={{ ...styles.td, color: 'var(--color-text-secondary)' }}>{member.email}</td>
-                  <td style={styles.td}>
-                    <span style={{ ...styles.badge, ...ROLE_STYLE[member.role] }}>
+                <TableRow key={member.id}>
+                  <TableCell className="font-semibold">{member.name}</TableCell>
+                  <TableCell className="text-m3-on-surface-variant">{member.email}</TableCell>
+                  <TableCell>
+                    <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-semibold ${ROLE_BADGE_CLASS[member.role]}`}>
                       {member.role.replace('_', ' ')}
                     </span>
-                  </td>
-                  <td style={{ ...styles.td, color: 'var(--color-text-muted)' }}>
+                  </TableCell>
+                  <TableCell className="text-m3-on-surface-variant">
                     {new Date(member.joined_at).toLocaleDateString('en-SG')}
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
-          </div>
+            </TableBody>
+          </Table>
         </section>
       </div>
     </div>
@@ -119,7 +119,7 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 'var(--space-2)',
   },
   sectionHeading: {
-    fontSize: 'var(--text-base)',
+    fontSize: 16,
     fontWeight: 700,
     color: 'var(--color-text-primary)',
   },
@@ -130,12 +130,12 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: 'baseline',
   },
   dt: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     fontWeight: 600,
     color: 'var(--color-text-secondary)',
   },
   dd: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     color: 'var(--color-text-primary)',
   },
   editBtn: {
@@ -145,7 +145,7 @@ const styles: Record<string, React.CSSProperties> = {
     color: 'var(--color-text-secondary)',
     border: '1px solid var(--color-border)',
     borderRadius: 'var(--radius-md)',
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     fontWeight: 600,
     cursor: 'pointer',
   },
@@ -155,33 +155,8 @@ const styles: Record<string, React.CSSProperties> = {
     color: '#fff',
     border: 'none',
     borderRadius: 'var(--radius-md)',
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     fontWeight: 600,
     cursor: 'pointer',
-  },
-  table: { width: '100%', borderCollapse: 'collapse' },
-  th: {
-    fontSize: 'var(--text-xs)',
-    fontWeight: 700,
-    color: 'var(--color-text-secondary)',
-    textTransform: 'uppercase',
-    letterSpacing: '0.05em',
-    padding: 'var(--space-2) var(--space-3)',
-    textAlign: 'left',
-    borderBottom: '2px solid var(--color-border)',
-  },
-  tr:  { borderBottom: '1px solid var(--color-border)' },
-  td: {
-    padding: 'var(--space-3)',
-    fontSize: 'var(--text-sm)',
-    color: 'var(--color-text-primary)',
-    verticalAlign: 'middle',
-  },
-  badge: {
-    display: 'inline-block',
-    padding: '2px 8px',
-    borderRadius: 100,
-    fontSize: 'var(--text-xs)',
-    fontWeight: 600,
   },
 }

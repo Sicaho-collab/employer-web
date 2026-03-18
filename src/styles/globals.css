@@ -55,13 +55,6 @@
 
   /* Typography */
   --font-sans: 'Instrument Sans', system-ui, -apple-system, sans-serif;
-  --text-xs:   11px;
-  --text-sm:   13px;
-  --text-base: 14px;
-  --text-md:   16px;
-  --text-lg:   18px;
-  --text-xl:   22px;
-  --text-2xl:  28px;
 
   /* Radius */
   --radius-sm: 4px;
@@ -88,7 +81,6 @@
 
   body {
     font-family: var(--font-sans);
-    font-size: var(--text-base);
     color: var(--color-m3-on-surface);
     background: var(--color-m3-surface);
     -webkit-font-smoothing: antialiased;

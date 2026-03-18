@@ -1,0 +1,208 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation "Side navigation" [ref=e4]:
+    - button "Expand navigation" [ref=e5]:
+      - img [ref=e6]
+    - generic [ref=e8]:
+      - button "Dashboard" [ref=e9]:
+        - generic [ref=e14]: dashboard
+        - generic [ref=e15]: Dashboard
+      - button "Hiring" [ref=e16]:
+        - generic [ref=e21]: work
+        - generic [ref=e22]: Hiring
+      - button "Finance" [ref=e23]:
+        - generic [ref=e28]: account_balance_wallet
+        - generic [ref=e29]: Finance
+      - button "Organisation" [ref=e30]:
+        - generic [ref=e35]: business
+        - generic [ref=e36]: Organisation
+  - generic [ref=e37]:
+    - banner [ref=e38]:
+      - img "Alumable" [ref=e39]
+      - button "User menu" [ref=e41] [cursor=pointer]: EH
+    - main [ref=e42]:
+      - generic [ref=e43]:
+        - generic [ref=e45]:
+          - heading "Finance" [level=1] [ref=e46]
+          - paragraph [ref=e47]: All payments across your gigs.
+        - generic [ref=e48]:
+          - generic [ref=e50]:
+            - generic [ref=e52]: attach_money
+            - generic [ref=e53]:
+              - paragraph [ref=e54]: Total Spend
+              - paragraph [ref=e55]: AUD 15,500.00
+          - generic [ref=e57]:
+            - generic [ref=e59]: schedule
+            - generic [ref=e60]:
+              - paragraph [ref=e61]: Pending Payments
+              - paragraph [ref=e62]: AUD 13,950.00
+          - generic [ref=e64]:
+            - generic [ref=e66]: check_circle
+            - generic [ref=e67]:
+              - paragraph [ref=e68]: Paid This Month
+              - paragraph [ref=e69]: AUD 0.00
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - generic [ref=e73]:
+              - generic [ref=e75]: search
+              - textbox "Search by gig title or payment ID..." [ref=e76]
+            - generic [ref=e78]:
+              - button "Filter" [ref=e79]:
+                - generic [ref=e80]: filter_list
+                - text: Filter
+              - button "Export" [ref=e81]:
+                - generic [ref=e82]: download
+                - text: Export
+          - table [ref=e84]:
+            - rowgroup [ref=e92]:
+              - row "ID Resize ID column Gig Resize Gig column Amount Resize Amount column Status Resize Status column Date Resize Date column Actions Resize Actions column" [ref=e93]:
+                - columnheader "ID Resize ID column" [ref=e94]:
+                  - generic [ref=e95]: ID
+                  - separator "Resize ID column" [ref=e96]
+                - columnheader "Gig Resize Gig column" [ref=e97]:
+                  - generic [ref=e98]: Gig
+                  - separator "Resize Gig column" [ref=e99]
+                - columnheader "Amount Resize Amount column" [ref=e100] [cursor=pointer]:
+                  - generic [ref=e101]:
+                    - text: Amount
+                    - generic [ref=e103]: unfold_more
+                  - separator "Resize Amount column" [ref=e104]
+                - columnheader "Status Resize Status column" [ref=e105] [cursor=pointer]:
+                  - generic [ref=e106]:
+                    - text: Status
+                    - generic [ref=e108]: unfold_more
+                  - separator "Resize Status column" [ref=e109]
+                - columnheader "Date Resize Date column" [ref=e110] [cursor=pointer]:
+                  - generic [ref=e111]:
+                    - text: Date
+                    - generic [ref=e113]: expand_more
+                  - separator "Resize Date column" [ref=e114]
+                - columnheader "Actions Resize Actions column" [ref=e115]:
+                  - generic [ref=e116]: Actions
+                  - separator "Resize Actions column" [ref=e117]
+            - rowgroup [ref=e118]:
+              - row "PAY-023 Community Manager $1,300.00 Authorised 15/03/2025" [ref=e119] [cursor=pointer]:
+                - cell "PAY-023" [ref=e120]
+                - cell "Community Manager" [ref=e121]:
+                  - link "Community Manager" [ref=e122]:
+                    - /url: /employer-web/hiring/g23
+                - cell "$1,300.00" [ref=e123]
+                - cell "Authorised" [ref=e124]:
+                  - generic [ref=e126]: Authorised
+                - cell "15/03/2025" [ref=e127]
+                - cell [ref=e128]
+              - row "PAY-022 Translator $650.00 Paid 14/03/2025 Download invoice for PAY-022" [ref=e129] [cursor=pointer]:
+                - cell "PAY-022" [ref=e130]
+                - cell "Translator" [ref=e131]:
+                  - link "Translator" [ref=e132]:
+                    - /url: /employer-web/hiring/g22
+                - cell "$650.00" [ref=e133]
+                - cell "Paid" [ref=e134]:
+                  - generic [ref=e136]: Paid
+                - cell "14/03/2025" [ref=e137]
+                - cell "Download invoice for PAY-022" [ref=e138]:
+                  - button "Download invoice for PAY-022" [ref=e139]:
+                    - generic [ref=e140]: download
+              - row "PAY-021 Project Coordinator $1,750.00 Failed 12/03/2025" [ref=e141] [cursor=pointer]:
+                - cell "PAY-021" [ref=e142]
+                - cell "Project Coordinator" [ref=e143]:
+                  - link "Project Coordinator" [ref=e144]:
+                    - /url: /employer-web/hiring/g21
+                - cell "$1,750.00" [ref=e145]
+                - cell "Failed" [ref=e146]:
+                  - generic [ref=e148]: Failed
+                - cell "12/03/2025" [ref=e149]
+                - cell [ref=e150]
+              - row "PAY-020 Motion Designer $2,200.00 Paid 10/03/2025 Download invoice for PAY-020" [ref=e151] [cursor=pointer]:
+                - cell "PAY-020" [ref=e152]
+                - cell "Motion Designer" [ref=e153]:
+                  - link "Motion Designer" [ref=e154]:
+                    - /url: /employer-web/hiring/g20
+                - cell "$2,200.00" [ref=e155]
+                - cell "Paid" [ref=e156]:
+                  - generic [ref=e158]: Paid
+                - cell "10/03/2025" [ref=e159]
+                - cell "Download invoice for PAY-020" [ref=e160]:
+                  - button "Download invoice for PAY-020" [ref=e161]:
+                    - generic [ref=e162]: download
+              - row "PAY-019 SEO Specialist $1,050.00 Authorised 07/03/2025" [ref=e163] [cursor=pointer]:
+                - cell "PAY-019" [ref=e164]
+                - cell "SEO Specialist" [ref=e165]:
+                  - link "SEO Specialist" [ref=e166]:
+                    - /url: /employer-web/hiring/g19
+                - cell "$1,050.00" [ref=e167]
+                - cell "Authorised" [ref=e168]:
+                  - generic [ref=e170]: Authorised
+                - cell "07/03/2025" [ref=e171]
+                - cell [ref=e172]
+              - row "PAY-018 Illustrator $1,400.00 Paid 06/03/2025 Download invoice for PAY-018" [ref=e173] [cursor=pointer]:
+                - cell "PAY-018" [ref=e174]
+                - cell "Illustrator" [ref=e175]:
+                  - link "Illustrator" [ref=e176]:
+                    - /url: /employer-web/hiring/g18
+                - cell "$1,400.00" [ref=e177]
+                - cell "Paid" [ref=e178]:
+                  - generic [ref=e180]: Paid
+                - cell "06/03/2025" [ref=e181]
+                - cell "Download invoice for PAY-018" [ref=e182]:
+                  - button "Download invoice for PAY-018" [ref=e183]:
+                    - generic [ref=e184]: download
+              - row "PAY-017 Business Analyst $1,900.00 Refunded 03/03/2025 Download refund receipt for PAY-017" [ref=e185] [cursor=pointer]:
+                - cell "PAY-017" [ref=e186]
+                - cell "Business Analyst" [ref=e187]:
+                  - link "Business Analyst" [ref=e188]:
+                    - /url: /employer-web/hiring/g17
+                - cell "$1,900.00" [ref=e189]
+                - cell "Refunded" [ref=e190]:
+                  - generic [ref=e192]: Refunded
+                - cell "03/03/2025" [ref=e193]
+                - cell "Download refund receipt for PAY-017" [ref=e194]:
+                  - button "Download refund receipt for PAY-017" [ref=e195]:
+                    - generic [ref=e196]: download
+              - row "PAY-016 Copywriter $800.00 Paid 01/03/2025 Download invoice for PAY-016" [ref=e197] [cursor=pointer]:
+                - cell "PAY-016" [ref=e198]
+                - cell "Copywriter" [ref=e199]:
+                  - link "Copywriter" [ref=e200]:
+                    - /url: /employer-web/hiring/g16
+                - cell "$800.00" [ref=e201]
+                - cell "Paid" [ref=e202]:
+                  - generic [ref=e204]: Paid
+                - cell "01/03/2025" [ref=e205]
+                - cell "Download invoice for PAY-016" [ref=e206]:
+                  - button "Download invoice for PAY-016" [ref=e207]:
+                    - generic [ref=e208]: download
+              - row "PAY-015 Product Designer $2,700.00 Authorised 27/02/2025" [ref=e209] [cursor=pointer]:
+                - cell "PAY-015" [ref=e210]
+                - cell "Product Designer" [ref=e211]:
+                  - link "Product Designer" [ref=e212]:
+                    - /url: /employer-web/hiring/g15
+                - cell "$2,700.00" [ref=e213]
+                - cell "Authorised" [ref=e214]:
+                  - generic [ref=e216]: Authorised
+                - cell "27/02/2025" [ref=e217]
+                - cell [ref=e218]
+              - row "PAY-014 DevOps Engineer $3,500.00 Paid 25/02/2025 Download invoice for PAY-014" [ref=e219] [cursor=pointer]:
+                - cell "PAY-014" [ref=e220]
+                - cell "DevOps Engineer" [ref=e221]:
+                  - link "DevOps Engineer" [ref=e222]:
+                    - /url: /employer-web/hiring/g14
+                - cell "$3,500.00" [ref=e223]
+                - cell "Paid" [ref=e224]:
+                  - generic [ref=e226]: Paid
+                - cell "25/02/2025" [ref=e227]
+                - cell "Download invoice for PAY-014" [ref=e228]:
+                  - button "Download invoice for PAY-014" [ref=e229]:
+                    - generic [ref=e230]: download
+          - generic [ref=e231]:
+            - paragraph [ref=e232]: Showing 1–10 of 23
+            - navigation "Pagination" [ref=e233]:
+              - button "Previous page" [disabled]:
+                - generic: chevron_left
+              - button "Page 1" [ref=e234]: "1"
+              - button "Page 2" [ref=e235]: "2"
+              - button "Page 3" [ref=e236]: "3"
+              - button "Next page" [ref=e237]:
+                - generic [ref=e238]: chevron_right
+```

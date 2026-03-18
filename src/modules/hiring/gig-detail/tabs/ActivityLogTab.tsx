@@ -59,14 +59,14 @@ export default function ActivityLogTab() {
 const styles: Record<string, React.CSSProperties> = {
   container: { display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' },
   heading: {
-    fontSize: 'var(--text-base)',
+    fontSize: 16,
     fontWeight: 700,
     color: 'var(--color-text-primary)',
     paddingBottom: 'var(--space-3)',
     borderBottom: '1px solid var(--color-border)',
   },
   note: {
-    fontSize: 'var(--text-xs)',
+    fontSize: 12,
     color: 'var(--color-text-muted)',
     marginTop: 'calc(-1 * var(--space-3))',
   },
@@ -115,24 +115,24 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 'var(--space-2)',
   },
   eventType: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     fontWeight: 700,
     color: 'var(--color-text-primary)',
     textTransform: 'capitalize',
     letterSpacing: '-0.01em',
   },
   actor: {
-    fontSize: 'var(--text-xs)',
+    fontSize: 12,
     fontWeight: 700,
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
   },
   description: {
-    fontSize: 'var(--text-sm)',
+    fontSize: 14,
     color: 'var(--color-text-secondary)',
   },
   time: {
-    fontSize: 'var(--text-xs)',
+    fontSize: 12,
     color: 'var(--color-text-muted)',
   },
 }

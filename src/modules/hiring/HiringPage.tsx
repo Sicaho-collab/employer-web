@@ -5,7 +5,7 @@ import GigListView from './GigListView'
 import type { GigViewTab, Gig } from '@/types/gig'
 import { GigStage, OfferStatus, PaymentStatus, TimesheetStatus, ErrorStatus } from '@/types/gig'
 import { getNeedsAttentionItems } from '@/utils/gigDisplay'
-import { Button, VerticalNavStepper } from '@sicaho-collab/ui-web'
+import { Button, VerticalNavStepper, Icon } from '@sicaho-collab/ui-web'
 import { cn } from '@/lib/utils'
 
 // ── Nav step definitions — V3 lifecycle stages ──────────────────────────────
@@ -210,7 +210,7 @@ export default function HiringPage() {
         subtitle="Your command center — manage gigs across the full lifecycle."
         actions={
           <Button onClick={() => navigate('/hiring/new')}>
-            + Post a Gig
+            <Icon name="add" /> Post a Gig
           </Button>
         }
       />
