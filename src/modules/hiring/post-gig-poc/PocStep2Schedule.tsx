@@ -26,6 +26,7 @@ export default function PocStep2Schedule({ data, patch, onNext, onBack }: Props)
             type="date"
             variant="outlined"
             label="Start Date"
+            required
             value={data.startDate}
             onChange={(e) => {
               const newStart = e.target.value
@@ -44,6 +45,7 @@ export default function PocStep2Schedule({ data, patch, onNext, onBack }: Props)
             type="date"
             variant="outlined"
             label="End Date"
+            required
             value={data.endDate}
             onChange={(e) => patch({ endDate: e.target.value })}
             min={minEnd}

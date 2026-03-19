@@ -60,6 +60,7 @@ export default function Step2Schedule({ data, patch, onBack, onNext }: Props) {
           variant="outlined"
           type="date"
           label="Start Date"
+          required
           value={data.startDate}
           min={today}
           onChange={e => handleStartChange(e.target.value)}
@@ -73,6 +74,7 @@ export default function Step2Schedule({ data, patch, onBack, onNext }: Props) {
             variant="outlined"
             type="date"
             label="End Date"
+            required
             value={data.endDate}
             min={data.startDate || today}
             onChange={e => handleEndChange(e.target.value)}

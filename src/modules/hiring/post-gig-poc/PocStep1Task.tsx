@@ -29,6 +29,7 @@ export default function PocStep1Task({ data, patch, onNext }: Props) {
           <TextField
             variant="outlined"
             label="Gig Title"
+            required
             value={data.title}
             onChange={(e) => patch({ title: e.target.value })}
             maxLength={100}
@@ -42,6 +43,7 @@ export default function PocStep1Task({ data, patch, onNext }: Props) {
             label="Task Description"
             multiline
             rows={5}
+            required
             value={data.description}
             onChange={(e) => patch({ description: e.target.value })}
             maxLength={1000}

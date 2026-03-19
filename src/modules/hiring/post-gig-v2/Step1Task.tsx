@@ -54,6 +54,7 @@ export default function Step1Task({ data, patch, onNext }: Props) {
             variant="outlined"
             label="Gig Title"
             placeholder="Campus Event Setup Assistant"
+            required
             value={data.title}
             maxLength={100}
             onChange={e => patch({ title: e.target.value.slice(0, 100) })}
@@ -73,6 +74,7 @@ export default function Step1Task({ data, patch, onNext }: Props) {
             placeholder="Describe what the student will be doing..."
             multiline
             rows={4}
+            required
             value={data.description}
             maxLength={1000}
             onChange={e => patch({ description: e.target.value.slice(0, 1000) })}

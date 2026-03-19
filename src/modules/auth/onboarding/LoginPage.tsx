@@ -82,6 +82,7 @@ export default function LoginPage() {
             label="Email"
             type="email"
             autoComplete="email"
+            required
             value={email}
             onChange={e => { setEmail(e.target.value); setServerError(null) }}
             onBlur={() => handleBlur('email')}
@@ -95,6 +96,7 @@ export default function LoginPage() {
             label="Password"
             type={showPassword ? 'text' : 'password'}
             autoComplete="current-password"
+            required
             value={password}
             onChange={e => { setPassword(e.target.value); setServerError(null) }}
             onBlur={() => handleBlur('password')}

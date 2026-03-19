@@ -45,6 +45,7 @@ export default function Step3Budget({ data, patch, onBack, onNext }: Props) {
           type="number"
           label="Budget ($)"
           placeholder="150"
+          required
           value={data.budget}
           onChange={e => patch({ budget: e.target.value })}
           onBlur={() => setBudgetTouched(true)}
@@ -57,6 +58,7 @@ export default function Step3Budget({ data, patch, onBack, onNext }: Props) {
           type="number"
           label="Estimated Hours"
           placeholder="5"
+          required
           value={data.estimatedHours}
           onChange={e => patch({ estimatedHours: e.target.value })}
           onBlur={() => setHoursTouched(true)}

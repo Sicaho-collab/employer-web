@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Button, Card, SimpleTooltip, Icon } from '@sicaho-collab/ui-web'
 import type { GigV3Data } from './PostGigV3Page'
 import { calculateFeeBreakdown, formatCurrency as fmtCur } from './fee-utils'
+import { countBusinessDays } from './gigV3Utils'
 
 interface Props {
   data: GigV3Data
@@ -35,6 +36,13 @@ export default function Step5Review({ data, onBack }: Props) {
   const breakdown = !isNaN(budgetNum) && budgetNum > 0
     ? calculateFeeBreakdown(budgetNum)
     : null
+
+  const gigDuration = useMemo(() => {
+    if (data.startDate && data.endDate && data.endDate > data.startDate) {
+      return countBusinessDays(data.startDate, data.endDate)
+    }
+    return null
+  }, [data.startDate, data.endDate])
 
   async function handlePublish() {
     setPublishing(true)
@@ -115,6 +123,21 @@ export default function Step5Review({ data, onBack }: Props) {
                 <p className="text-base text-m3-on-surface">None selected</p>
               )}
             </div>
+            {data.tools.length > 0 && (
+              <div>
+                <p className="text-sm text-m3-on-surface-variant">Tools</p>
+                <div className="flex flex-wrap gap-1.5 mt-1">
+                  {data.tools.map((tool) => (
+                    <span
+                      key={tool}
+                      className="inline-flex items-center rounded-m3-full bg-m3-surface-container text-m3-on-surface text-xs font-medium px-3 py-1"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             <FieldRow
               label="Gig Type"
               value={
@@ -164,6 +187,14 @@ export default function Step5Review({ data, onBack }: Props) {
                   {formatDate(data.startDate)} – {formatDate(data.endDate)}
                 </p>
               </div>
+              {gigDuration !== null && (
+                <div>
+                  <p className="text-sm text-m3-on-surface/70">Gig Duration</p>
+                  <p className="text-base font-medium text-m3-on-surface">
+                    {gigDuration} business day{gigDuration !== 1 ? 's' : ''}
+                  </p>
+                </div>
+              )}
               <div>
                 <p className="text-sm text-m3-on-surface/70">Application Deadline</p>
                 <p className="text-base font-medium text-m3-on-surface">{formatDate(data.applicationDeadline)}</p>
@@ -294,7 +325,7 @@ function FieldRow({ label, value, hint }: { label: string; value: string; hint?:
           </SimpleTooltip>
         )}
       </p>
-      <p className="text-base text-m3-on-surface break-words">{value}</p>
+      <p className="text-base text-m3-on-surface break-words whitespace-pre-wrap">{value}</p>
     </div>
   )
 }

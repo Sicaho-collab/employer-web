@@ -1,25 +1,13 @@
 import { useState, useMemo, useCallback } from 'react'
 import { Button, Card, DateRangePicker } from '@sicaho-collab/ui-web'
 import type { GigV3Data } from './PostGigV3Page'
+import { countBusinessDays } from './gigV3Utils'
 
 interface Props {
   data: GigV3Data
   patch: (updates: Partial<GigV3Data>) => void
   onBack: () => void
   onNext: () => void
-}
-
-function countBusinessDays(start: string, end: string): number {
-  const s = new Date(start)
-  const e = new Date(end)
-  let count = 0
-  const d = new Date(s)
-  while (d <= e) {
-    const day = d.getDay()
-    if (day !== 0 && day !== 6) count++
-    d.setDate(d.getDate() + 1)
-  }
-  return count
 }
 
 /** Convert Date to yyyy-mm-dd ISO string */

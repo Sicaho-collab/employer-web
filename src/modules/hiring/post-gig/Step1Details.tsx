@@ -81,6 +81,7 @@ export default function Step1Details({ wizard, patch, onNext }: Props) {
         <TextField
           variant="outlined"
           label="Role Title"
+          required
           value={wizard.aiTitle}
           maxLength={80}
           onChange={e => patch({ aiTitle: e.target.value })}
@@ -119,6 +120,7 @@ export default function Step1Details({ wizard, patch, onNext }: Props) {
           label="Description"
           multiline
           rows={8}
+          required
           value={wizard.aiDescription}
           maxLength={2000}
           onChange={e => patch({ aiDescription: e.target.value })}

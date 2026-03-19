@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import { Button, Card, Chip, TextField } from '@sicaho-collab/ui-web'
+import { Button, Card, Chip, ChipGroup, TextField, Icon, Autocomplete } from '@sicaho-collab/ui-web'
+import type { AutocompleteOption } from '@sicaho-collab/ui-web'
 import type { GigV3Data } from './PostGigV3Page'
+import { TOOLS_OPTIONS } from './gigV3Utils'
 
 const CAPABILITY_OPTIONS = [
   'Analytical & Data Thinking',
@@ -25,6 +27,13 @@ export default function Step1Details({ data, patch, onNext }: Props) {
   const [titleTouched, setTitleTouched] = useState(false)
   const [descTouched, setDescTouched] = useState(false)
   const [capTouched, setCapTouched] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  function handleCopyPrompt() {
+    navigator.clipboard.writeText(data.prompt)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   const titleLen = data.title.length
   const descLen = data.description.length
@@ -61,6 +70,9 @@ export default function Step1Details({ data, patch, onNext }: Props) {
     }
   }
 
+  const showTitleRevert = !!data.aiTitle && data.title !== data.aiTitle
+  const showDescRevert = !!data.aiDescription && data.description !== data.aiDescription
+
   function handleContinue() {
     setTitleTouched(true)
     setDescTouched(true)
@@ -75,6 +87,24 @@ export default function Step1Details({ data, patch, onNext }: Props) {
           variant="outlined"
           className="p-4 md:p-5 flex flex-col gap-4 bg-m3-surface-container-lowest"
         >
+          {/* Original prompt reference — inside card */}
+          {data.prompt && (
+            <div className="rounded-m3-sm bg-m3-surface-container px-4 py-3 flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-xs font-medium text-m3-on-surface-variant mb-1">What you told us</p>
+                <p className="text-sm text-m3-on-surface-variant italic">"{data.prompt}"</p>
+              </div>
+              <button
+                type="button"
+                onClick={handleCopyPrompt}
+                className="shrink-0 p-1.5 rounded-m3-sm text-m3-on-surface-variant hover:bg-m3-surface-container-high transition-colors flex items-center justify-center"
+                aria-label="Copy prompt to clipboard"
+              >
+                {copied ? <Icon name="check" size={16} className="text-m3-primary" /> : <Icon name="content_copy" size={16} />}
+              </button>
+            </div>
+          )}
+
           <p className="text-sm font-semibold text-m3-on-surface">
             Gig Information
           </p>
@@ -83,6 +113,7 @@ export default function Step1Details({ data, patch, onNext }: Props) {
               variant="outlined"
               label="Gig Title"
               placeholder="Campus Event Setup Assistant"
+              required
               value={data.title}
               maxLength={100}
               onChange={e => patch({ title: e.target.value.slice(0, 100) })}
@@ -90,15 +121,26 @@ export default function Step1Details({ data, patch, onNext }: Props) {
               error={!!titleError}
               errorText={titleError}
             />
-            <p
-              className={`text-xs mt-1 px-4 ${
-                titleLen >= 100
-                  ? 'text-m3-error'
-                  : 'text-m3-on-surface-variant'
-              }`}
-            >
-              {titleLen} / 100
-            </p>
+            <div className="flex items-center justify-between mt-1 px-4">
+              <p
+                className={`text-xs ${
+                  titleLen >= 100
+                    ? 'text-m3-error'
+                    : 'text-m3-on-surface-variant'
+                }`}
+              >
+                {titleLen} / 100
+              </p>
+              {showTitleRevert && (
+                <button
+                  type="button"
+                  onClick={() => patch({ title: data.aiTitle })}
+                  className="text-xs text-m3-primary hover:underline"
+                >
+                  Revert to AI suggestion
+                </button>
+              )}
+            </div>
           </div>
           <div>
             <TextField
@@ -107,6 +149,7 @@ export default function Step1Details({ data, patch, onNext }: Props) {
               placeholder="Describe what the student will be doing..."
               multiline
               rows={4}
+              required
               value={data.description}
               maxLength={1000}
               onChange={e =>
@@ -116,15 +159,26 @@ export default function Step1Details({ data, patch, onNext }: Props) {
               error={!!descError}
               errorText={descError}
             />
-            <p
-              className={`text-xs mt-1 px-4 ${
-                descLen >= 1000
-                  ? 'text-m3-error'
-                  : 'text-m3-on-surface-variant'
-              }`}
-            >
-              {descLen} / 1000
-            </p>
+            <div className="flex items-center justify-between mt-1 px-4">
+              <p
+                className={`text-xs ${
+                  descLen >= 1000
+                    ? 'text-m3-error'
+                    : 'text-m3-on-surface-variant'
+                }`}
+              >
+                {descLen} / 1000
+              </p>
+              {showDescRevert && (
+                <button
+                  type="button"
+                  onClick={() => patch({ description: data.aiDescription })}
+                  className="text-xs text-m3-primary hover:underline"
+                >
+                  Revert to AI suggestion
+                </button>
+              )}
+            </div>
           </div>
         </Card>
 
@@ -132,15 +186,13 @@ export default function Step1Details({ data, patch, onNext }: Props) {
           variant="outlined"
           className="p-4 md:p-5 flex flex-col gap-4 bg-m3-surface-container-lowest"
         >
-          <div>
-            <p className="text-sm font-semibold text-m3-on-surface">
-              Capabilities
-            </p>
-            <p className="text-xs text-m3-on-surface-variant mt-1">
-              Select up to {MAX_CAPABILITIES} capabilities required for this gig
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
+          <ChipGroup
+            label="Capabilities"
+            supportingText={`Select up to ${MAX_CAPABILITIES} capabilities required for this gig`}
+            required
+            error={!!capError}
+            errorText={capError}
+          >
             {CAPABILITY_OPTIONS.map(cap => {
               const selected = data.capabilities.includes(cap)
               const disabled = !selected && data.capabilities.length >= MAX_CAPABILITIES
@@ -156,10 +208,31 @@ export default function Step1Details({ data, patch, onNext }: Props) {
                 </Chip>
               )
             })}
+          </ChipGroup>
+        </Card>
+
+        {/* Tools section */}
+        <Card
+          variant="outlined"
+          className="p-4 md:p-5 flex flex-col gap-4 bg-m3-surface-container-lowest"
+        >
+          <div>
+            <p className="text-sm font-semibold text-m3-on-surface">
+              Tools
+            </p>
+            <p className="text-xs text-m3-on-surface-variant mt-1">
+              What tools help execute those tasks? (optional)
+            </p>
           </div>
-          {capError && (
-            <p className="text-xs text-m3-error" role="alert">{capError}</p>
-          )}
+
+          <Autocomplete
+            options={TOOLS_OPTIONS.map(t => ({ label: t, value: t }))}
+            label="Tools"
+            placeholder="Search tools..."
+            multiple
+            value={data.tools.map(t => ({ label: t, value: t }))}
+            onChange={(val) => patch({ tools: (val as AutocompleteOption[]).map(v => v.value) })}
+          />
         </Card>
       </div>
 

@@ -145,6 +145,7 @@ export default function ForgotPasswordPage() {
             label="Email"
             type="email"
             autoComplete="email"
+            required
             value={email}
             onChange={e => { setEmail(e.target.value); setServerError(null) }}
             onBlur={() => setTouched(true)}

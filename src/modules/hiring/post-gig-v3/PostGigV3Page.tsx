@@ -7,12 +7,16 @@ import Step2Timeline from './Step2Timeline'
 import Step3Budget from './Step3Budget'
 import Step4Preferences from './Step4Preferences'
 import Step5Review from './Step5Review'
+import { simulateAIv3 } from './gigV3Utils'
 
 export interface GigV3Data {
   prompt: string
   title: string
   description: string
   capabilities: string[]
+  tools: string[]
+  aiTitle: string
+  aiDescription: string
   startDate: string
   endDate: string
   flexibleStart: boolean
@@ -34,6 +38,9 @@ export const INITIAL_DATA: GigV3Data = {
   title: '',
   description: '',
   capabilities: [],
+  tools: [],
+  aiTitle: '',
+  aiDescription: '',
   startDate: '',
   endDate: '',
   flexibleStart: false,
@@ -64,12 +71,30 @@ export default function PostGigV3Page() {
   // step=0 means pre-step, 1-5 are wizard steps
   const [step, setStep] = useState(0)
   const [data, setData] = useState<GigV3Data>(INITIAL_DATA)
+  const [isGenerating, setIsGenerating] = useState(false)
   const patch = useCallback((updates: Partial<GigV3Data>) => {
     setData(prev => ({ ...prev, ...updates }))
   }, [])
 
   const goNext = () => setStep(s => Math.min(s + 1, TOTAL_STEPS))
   const goBack = () => setStep(s => Math.max(s - 1, step <= 1 ? 0 : 1))
+
+  async function handleAISend(msg: string) {
+    patch({ prompt: msg })
+    setIsGenerating(true)
+    try {
+      const result = await simulateAIv3(msg)
+      patch({
+        title: result.title,
+        description: result.description,
+        aiTitle: result.title,
+        aiDescription: result.description,
+      })
+      setStep(1)
+    } finally {
+      setIsGenerating(false)
+    }
+  }
 
 
   return (
@@ -94,11 +119,23 @@ export default function PostGigV3Page() {
             What do you need help with?
           </h1>
           <AIPromptBox
-            onSend={(msg) => { patch({ prompt: msg }); setStep(1) }}
+            value={data.prompt}
+            onChange={v => patch({ prompt: v })}
+            onSend={handleAISend}
+            disabled={isGenerating}
             placeholder="Describe the work you need done, and I will help you create the perfect gig to find the right talent"
             sendLabel="Get Started"
             className="w-full max-w-[640px]"
           />
+          {isGenerating && (
+            <div role="status" aria-live="polite" className="flex items-center gap-3 mt-6 text-sm text-m3-on-surface-variant">
+              <svg className="animate-spin h-5 w-5 text-m3-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              Generating your gig details...
+            </div>
+          )}
           <div className="text-center mt-4 text-xs" style={{ color: 'var(--md-sys-color-outline)' }}>
             Alumable AI can make mistakes. Please check for accuracy.{' '}
             <a href="#" className="text-[#9A76BE] hover:underline">See terms</a>

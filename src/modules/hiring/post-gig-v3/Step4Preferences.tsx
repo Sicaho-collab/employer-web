@@ -159,6 +159,7 @@ export default function Step4Preferences({
                 variant="outlined"
                 label="Location"
                 placeholder="Building A, Level 3 or 123 Main St"
+                required={needsLocationDetails}
                 value={data.locationDetails}
                 maxLength={200}
                 onChange={e =>
@@ -226,6 +227,7 @@ export default function Step4Preferences({
                   variant="outlined"
                   label="Name"
                   placeholder="Manager or team member name"
+                  required={!data.isOwner}
                   value={data.approvalName}
                   onChange={e => patch({ approvalName: e.target.value })}
                   onBlur={() => setApprovalNameTouched(true)}
@@ -237,6 +239,7 @@ export default function Step4Preferences({
                   label="Email"
                   placeholder="manager@company.com"
                   type="email"
+                  required={!data.isOwner}
                   value={data.approvalEmail}
                   onChange={e => patch({ approvalEmail: e.target.value })}
                   onBlur={() => setApprovalEmailTouched(true)}

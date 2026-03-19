@@ -114,6 +114,7 @@ export default function Step5ReviewPublish({ wizard, patch, onBack, onPublish }:
             <TextField
               variant="outlined"
               label="Approver Name"
+              required
               value={wizard.approverName}
               onChange={e => patch({ approverName: e.target.value })}
               error={!!wizard.approverName && !nameOk}
@@ -125,6 +126,7 @@ export default function Step5ReviewPublish({ wizard, patch, onBack, onPublish }:
               variant="outlined"
               label="Approver Email"
               type="email"
+              required
               value={wizard.approverEmail}
               onChange={e => patch({ approverEmail: e.target.value })}
               error={!!wizard.approverEmail && !emailOk}

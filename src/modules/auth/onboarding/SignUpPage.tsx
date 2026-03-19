@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Card, Button, Chip, Checkbox, TextField, Icon } from '@sicaho-collab/ui-web'
+import { Card, Button, Chip, ChipGroup, Checkbox, TextField, Icon } from '@sicaho-collab/ui-web'
 import {
   validateEmail,
   validatePassword,
@@ -153,6 +153,7 @@ export default function SignUpPage() {
             label="Full Name"
             type="text"
             autoComplete="name"
+            required
             value={data.fullName}
             onChange={e => patch({ fullName: e.target.value })}
             onBlur={() => handleBlur('fullName')}
@@ -166,6 +167,7 @@ export default function SignUpPage() {
             label="Email"
             type="email"
             autoComplete="email"
+            required
             value={data.email}
             onChange={e => patch({ email: e.target.value })}
             onBlur={() => handleBlur('email')}
@@ -181,6 +183,7 @@ export default function SignUpPage() {
               label="Password"
               type={showPassword ? 'text' : 'password'}
               autoComplete="new-password"
+              required
               value={data.password}
               onChange={e => patch({ password: e.target.value })}
               onBlur={() => handleBlur('password')}
@@ -217,6 +220,7 @@ export default function SignUpPage() {
             label="Confirm Password"
             type={showConfirmPassword ? 'text' : 'password'}
             autoComplete="new-password"
+            required
             value={data.confirmPassword}
             onChange={e => patch({ confirmPassword: e.target.value })}
             onBlur={() => handleBlur('confirmPassword')}
@@ -237,27 +241,24 @@ export default function SignUpPage() {
           />
 
           {/* Role selector */}
-          <div>
-            <p className="text-sm font-semibold text-m3-on-surface mb-2">I am a:</p>
-            <div className="flex gap-2 flex-wrap">
-              <Chip
-                variant="filter"
-                selected={data.role === 'employer'}
-                onClick={() => patch({ role: 'employer' })}
-                className="cursor-pointer"
-              >
-                Employer
-              </Chip>
-              <Chip
-                variant="filter"
-                selected={data.role === 'student'}
-                onClick={() => patch({ role: 'student' })}
-                className="cursor-pointer"
-              >
-                Student
-              </Chip>
-            </div>
-          </div>
+          <ChipGroup label="I am a:" required>
+            <Chip
+              variant="filter"
+              selected={data.role === 'employer'}
+              onClick={() => patch({ role: 'employer' })}
+              className="cursor-pointer"
+            >
+              Employer
+            </Chip>
+            <Chip
+              variant="filter"
+              selected={data.role === 'student'}
+              onClick={() => patch({ role: 'student' })}
+              className="cursor-pointer"
+            >
+              Student
+            </Chip>
+          </ChipGroup>
 
           {/* Terms checkbox */}
           <label className="flex items-center gap-3 cursor-pointer">

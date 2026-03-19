@@ -31,6 +31,7 @@ export default function Step2Timeline({ wizard, patch, onBack, onNext }: Props) 
               variant="outlined"
               label="Start date"
               type="date"
+              required
               value={wizard.startDate}
               min={minStart}
               onChange={e => patch({ startDate: e.target.value })}
@@ -44,6 +45,7 @@ export default function Step2Timeline({ wizard, patch, onBack, onNext }: Props) 
               variant="outlined"
               label="End date"
               type="date"
+              required
               value={wizard.endDate}
               min={wizard.startDate || today}
               onChange={e => patch({ endDate: e.target.value })}

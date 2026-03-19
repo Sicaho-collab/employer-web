@@ -28,6 +28,7 @@ export default function PocStep3Budget({ data, patch, onNext, onBack }: Props) {
             variant="outlined"
             label="Budget ($)"
             placeholder="150"
+            required
             value={data.budget}
             onChange={(e) => patch({ budget: e.target.value })}
             min={1}
@@ -40,6 +41,7 @@ export default function PocStep3Budget({ data, patch, onNext, onBack }: Props) {
             variant="outlined"
             label="Estimated Hours"
             placeholder="5"
+            required
             value={data.estimatedHours}
             onChange={(e) => patch({ estimatedHours: e.target.value })}
             min={1}
